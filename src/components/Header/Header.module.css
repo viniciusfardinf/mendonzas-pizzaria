@@ -1,13 +1,13 @@
 /* src/components/Header/Header.module.css */
 .mainHeader {
-  background-color: transparent;
-  padding: 1.5rem 0;
-  box-shadow: none;
-  position: absolute;
+  background-color: transparent; /* Fundo transparente */
+  padding: 1.5rem 0; /* Espaçamento vertical */
+  box-shadow: none; /* Sem sombra */
+  position: absolute; /* Posicionamento absoluto para flutuar */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 101;
+  z-index: 101; /* Garante que fique acima de outros elementos */
 }
 
 .container {
@@ -18,19 +18,19 @@
 
 .headerContainer {
   display: flex;
-  justify-content: flex-end; /* Alinha os botões à direita */
+  justify-content: flex-end; /* Alinha os botões à direita no desktop */
   align-items: center;
 }
 
 .mainNav ul {
-  list-style: none; /* Garante que os bullets sejam removidos */
-  display: flex; /* Coloca os itens um ao lado do outro */
+  list-style: none; /* Remove bullets */
+  display: flex; /* Itens em linha */
   gap: 2rem; /* Espaçamento entre os links */
 }
 
 .mainNav a {
   text-decoration: none;
-  color: var(--secondary-color); /* ALTERADO: Cor da fonte dourada */
+  color: var(--secondary-color); /* Cor dourada */
   font-weight: 700;
   font-size: 1.1rem;
   position: relative;
@@ -43,14 +43,14 @@
   position: absolute;
   width: 0;
   height: 3px;
-  background-color: var(--primary-color); /* Linha vermelha no hover */
+  background-color: var(--primary-color);
   left: 0;
   bottom: 0;
   transition: width var(--transition-speed);
 }
 
 .mainNav a:hover {
-  color: var(--primary-color); /* ALTERADO: Cor no hover para vermelho */
+  color: var(--primary-color);
 }
 
 .mainNav a:hover::after,
@@ -59,28 +59,48 @@
 }
 
 /* Media Queries para Header */
+
+/* Tablets e Mobile Landscape (paisagem) */
 @media (max-width: 768px) {
+    .mainHeader {
+        padding: 1rem 0; /* Reduzi o padding vertical do header em tablets */
+    }
+
     .headerContainer {
-        flex-direction: row; /* Garante que continua em linha */
-        justify-content: center; /* Centraliza os botões em telas pequenas */
-        gap: 0.8rem;
+        justify-content: center; /* Centraliza os botões em telas de tablet */
+        flex-direction: row; /* Garante que os links continuem em linha */
+        flex-wrap: wrap; /* Permite que os links quebrem linha se houver muitos */
+        gap: 1.5rem; /* Ajusta o espaçamento entre os links em tablets */
+        padding: 0 1rem; /* Adiciona um pouco de padding lateral para não colar nas bordas */
     }
 
     .mainNav ul {
-        flex-direction: row; /* Garante que os itens continuem em linha no mobile */
-        gap: 0.8rem;
-        flex-wrap: wrap; /* Permite quebrar linha se não couberem */
-        justify-content: center;
+        gap: 1.5rem; /* Garante que o gap interno da lista também seja ajustado */
     }
 
-    .mainHeader {
-        padding: 1rem 0; /* Ajuste o padding para mobile */
+    .mainNav a {
+        font-size: 1rem; /* Fonte levemente menor para caber melhor */
+        padding: 5px 10px; /* Adicionei padding nos links para aumentar a área clicável */
     }
 }
 
+/* Mobile Portrait (retrato) */
 @media (max-width: 480px) {
+    .mainHeader {
+        padding: 0.8rem 0; /* Mais compacto para celulares pequenos */
+    }
+
+    .headerContainer {
+        gap: 0.8rem; /* Reduz ainda mais o espaçamento entre os links */
+        padding: 0 0.8rem; /* Ajusta o padding lateral */
+    }
+
+    .mainNav ul {
+        gap: 0.8rem; /* Reduz o gap interno da lista */
+    }
+
     .mainNav a {
-        font-size: 0.95rem; /* Diminui um pouco a fonte em telas muito pequenas */
-        padding-bottom: 3px; /* Ajusta o padding para a linha */
+        font-size: 0.9rem; /* Fonte menor para caber melhor */
+        padding: 3px 8px; /* Ajuste o padding para a área clicável */
     }
 }

@@ -1,8 +1,7 @@
-// src/components/MenuSection/MenuSection.js
-import React, { useState } from 'react'; // Importa useState
+import React, { useState } from 'react';
 import styles from './MenuSection.module.css';
 import MenuItem from '../MenuItem/MenuItem';
-import menuItemsData from '../../data/menuData'; // Importa os dados do menu
+import menuItemsData from '../../data/menuData';
 
 function MenuSection() {
   const [activeCategory, setActiveCategory] = useState('salgada'); // Estado para a categoria ativa, padrão 'salgada'
@@ -49,7 +48,7 @@ function MenuSection() {
         {/* Grid de Itens Filtrados */}
         <div className={styles.menuGrid}>
           {filteredItems.map((item) => (
-            <MenuItem key={item.id} pizza={item} /> // Usando item.id como key, que é mais robusto
+            <MenuItem key={item.id} pizza={item} />
           ))}
         </div>
 

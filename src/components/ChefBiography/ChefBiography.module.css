@@ -1,0 +1,102 @@
+/* src/components/ChefBiography/ChefBiography.module.css */
+
+.biographySection {
+    padding: 4rem 0;
+    background-color: var(--background-light);
+    text-align: center;
+}
+
+.biographyContentBlock {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+/* Variação para imagem à direita (texto à esquerda) */
+.imageRight {
+    flex-direction: row-reverse; /* ESTA REGRA FARÁ A IMAGEM IR PARA A DIREITA */
+}
+
+.chefImageContainer {
+    flex-shrink: 0;
+    max-width: 40%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.chefImage {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.chefText {
+    flex-grow: 1;
+    max-width: 55%;
+}
+
+.chefText p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.chefText p:last-child {
+    margin-bottom: 0;
+}
+
+/* Media Queries para Chef Biography Section */
+@media (max-width: 768px) {
+    .biographyContentBlock {
+        flex-direction: column; /* Empilha imagem e texto em mobile */
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    /* Para o bloco com imagem à direita, no mobile, podemos querer inverter a ordem de empilhamento */
+    .imageRight {
+        flex-direction: column-reverse; /* Imagem embaixo do texto no mobile */
+    }
+
+    .chefImageContainer {
+        max-width: 90%;
+        height: 250px;
+    }
+
+    .chefImage {
+        object-position: center;
+    }
+
+    .chefText {
+        max-width: 100%;
+        text-align: center;
+    }
+    .chefText p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .biographyContentBlock {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    .chefImageContainer {
+        height: 200px;
+    }
+    .chefText p {
+        font-size: 0.95rem;
+    }
+}

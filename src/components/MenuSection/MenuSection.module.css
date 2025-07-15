@@ -2,8 +2,8 @@
 .menuSection {
     padding: 4rem 0;
     background-color: var(--background-light);
-    padding-bottom: 6rem;
-    text-align: center;
+    padding-bottom: 6rem; /* Espaçamento entre o menu e o rodapé */
+    text-align: center; /* Centraliza o título principal */
 }
 
 .section-title {
@@ -15,7 +15,7 @@
     justify-content: center;
     gap: 1.5rem;
     margin-bottom: 3rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
 }
 
 .filterBtn {
@@ -53,7 +53,7 @@
 
 .menuGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste o minmax para controlar quantas colunas visíveis */
     gap: 1.5rem;
     margin-top: 0;
     max-width: 1200px;
@@ -107,7 +107,7 @@
         margin-bottom: 1rem;
     }
     .menuGrid {
-        grid-template-columns: 1fr; /* UMA COLUNA ÚNICA para mobile */
+        grid-template-columns: 1fr; /* Uma única coluna em mobile */
         gap: 1rem;
         padding: 0 1rem;
     }

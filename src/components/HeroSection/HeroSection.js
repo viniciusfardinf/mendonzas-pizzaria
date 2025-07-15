@@ -1,9 +1,8 @@
-// src/components/HeroSection/HeroSection.js
 import React from 'react';
 import styles from './HeroSection.module.css';
 import carouselImg2 from '../../assets/carousel/2.jpg'; // Imagem da esquerda
 import carouselImg7 from '../../assets/carousel/7.jpg'; // Imagem da direita
-import heroBgMobile from '../../assets/carousel/1.jpg'; // NOVA IMAGEM: Opcional, para um BG específico de mobile
+import heroBgMobile from '../../assets/carousel/1.jpg'; // Imagem de fundo para mobile
 
 function HeroSection() {
   return (
@@ -12,8 +11,7 @@ function HeroSection() {
       <img src={carouselImg2} alt="Pizzaiolo preparando pizza" className={styles.heroImageLeft} loading="lazy" />
       <img src={carouselImg7} alt="Pizzaiolo com pizza no forno" className={styles.heroImageRight} loading="lazy" />
 
-      {/* NOVO: Elemento para imagem de fundo exclusiva para mobile, se você quiser. */}
-      {/* Se não for usar heroBgMobile, o background será definido diretamente no .hero */}
+      {/* Elemento para imagem de fundo exclusiva para mobile */}
       <div className={styles.heroBackgroundMobile} style={{ backgroundImage: `url(${heroBgMobile})` }}></div>
 
       <div className={styles.heroContent}>

@@ -1,5 +1,85 @@
 /* src/components/HeroSection/HeroSection.module.css */
-/* ... (código anterior do desktop) ... */
+.hero {
+    background-color: #000;
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.heroImageLeft,
+.heroImageRight {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.heroImageLeft {
+    left: 0;
+}
+
+.heroImageRight {
+    right: 0;
+}
+
+.heroBackgroundMobile {
+    display: none; /* Por padrão, oculto no desktop */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.heroContent {
+    max-width: 600px;
+    z-index: 3;
+    /* Posicionamento absoluto para centralização no desktop */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o elemento */
+    padding: 2rem;
+    box-sizing: border-box; /* Garante que padding não adicione largura extra */
+}
+
+.heroContent h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.heroContent p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Media Queries para Hero Section */
+@media (max-width: 1024px) {
+    .heroImageLeft,
+    .heroImageRight {
+        width: 50%;
+    }
+
+    .heroContent {
+        max-width: 500px;
+    }
+}
 
 /* ---------------------------------------------------------------------- */
 /* LAYOUT PARA CELULARES (max-width: 768px e 480px) */
@@ -7,26 +87,31 @@
 
 @media (max-width: 768px) {
     .hero {
-        min-height: 100vh;
         padding: 0;
-        flex-direction: column;
-        justify-content: center; /* Mantém a centralização vertical geral */
+        min-height: 100vh;
+        display: flex; /* Para centralizar o conteúdo em mobile */
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; /* Necessário para o conteúdo empilhar se houver mais de um item flex */
     }
 
     .heroImageLeft,
     .heroImageRight {
-        display: none;
+        display: none; /* Oculta as imagens absolutas em mobile */
     }
 
     .heroBackgroundMobile {
-        display: block;
+        display: block; /* Ativa a imagem de fundo para mobile */
     }
 
     .heroContent {
         max-width: 90%;
-        padding: 6rem 1.5rem 2rem; /* ALTERADO: Aumentei o padding-top para descer o texto */
-        position: relative;
-        z-index: 2;
+        position: static; /* Volta a ser um elemento flex normal */
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 6rem 1.5rem 2rem; /* Adiciona padding-top para descer o texto */
+        z-index: 2; /* Texto ainda sobre o fundo */
     }
 
     .heroContent h1 {
@@ -48,6 +133,6 @@
     }
     
     .heroContent {
-        padding: 5rem 1rem 1.5rem; /* ALTERADO: Ajuste o padding para telas muito pequenas, aumentando o top */
+        padding: 5rem 1rem 1.5rem; /* Ajuste o padding para telas muito pequenas */
     }
 }

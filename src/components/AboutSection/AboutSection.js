@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './AboutSection.module.css';
-// REMOVIDO: import TestimonialsSlider from '../TestimonialsSlider/TestimonialsSlider'; // NÃO importamos mais aqui
 
 function AboutSection() {
   return (
     <section id="sobre-carousel" className={styles.aboutSection}>
-      <div className={`${styles.container} container ${styles.aboutContainer}`}>
+      <div className="container"> {/* O container global já é suficiente aqui */}
         <div className={styles.quemSomos}>
           <h2 className="section-title">Quem Somos</h2>
           <p>
@@ -15,12 +14,10 @@ function AboutSection() {
           </p>
           <p>
             Venha nos visitar ou faça seu pedido! Estamos abertos de ⏱️ <strong>Quarta a Domingo, das 19h às 22h</strong>.
-            Encontre-nos em 📍 <strong>Rua Manoel Alonso Portela, Muniz Freire - ES</strong>.
+            Encontre-nos em 📍 <strong>Rua Manoel Alonso Portela, 194, Muniz Freire - ES</strong>.
           </p>
         </div>
-        {/* TestimonialsSlider NÃO é mais renderizado AQUI */}
       </div>
-       {/* TestimonialsSlider NÃO é mais renderizado AQUI também */}
     </section>
   );
 }

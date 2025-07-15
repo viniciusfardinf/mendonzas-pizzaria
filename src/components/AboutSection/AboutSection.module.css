@@ -1,22 +1,15 @@
 /* src/components/AboutSection/AboutSection.module.css */
 .aboutSection {
-    padding: 4rem 0;
+    padding: 4rem 0; /* Espaçamento da seção */
     background-color: var(--card-background);
-}
-
-.aboutContainer {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 3rem;
-    align-items: center;
-    justify-content: center;
+    text-align: center; /* Centraliza o texto "Quem Somos" */
 }
 
 .quemSomos {
-    flex: 1;
-    max-width: 50%;
-    text-align: left;
-    padding: 1.5rem;
+    max-width: 800px; /* Aumenta a largura máxima para o texto */
+    margin: 0 auto; /* Centraliza o bloco "Quem Somos" */
+    text-align: center; /* O texto já está centralizado pela seção, mas mantive por segurança */
+    padding: 1.5rem; /* Padding interno */
 }
 
 .quemSomos h2 {
@@ -38,19 +31,13 @@
 /* Media Queries para About Section */
 @media (max-width: 1024px) {
     .quemSomos {
-        max-width: 45%;
+        max-width: 700px; /* Ajusta a largura em telas intermediárias */
     }
 }
 
 @media (max-width: 768px) {
-    .aboutContainer {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
     .quemSomos {
-        text-align: center;
-        padding: 0 1.5rem;
+        padding: 0 1.5rem; /* Garante padding lateral em mobile */
         max-width: 100%;
     }
 }

@@ -1,9 +1,13 @@
 import React from 'react';
 import Header from './components/Header/Header';
 import HeroSection from './components/HeroSection/HeroSection';
-import AboutSection from './components/AboutSection/AboutSection'; // Manteremos AboutSection para o "Quem Somos"
+import ChefBiography from './components/ChefBiography/ChefBiography'; // Importa o novo componente ChefBiography
 import MenuSection from './components/MenuSection/MenuSection';
+import AboutSection from './components/AboutSection/AboutSection'; // Seção "Sobre Nós" simplificada
 import Footer from './components/Footer/Footer';
+
+// Observação: Não há necessidade de importar App.css se você usa GlobalStyles.css e CSS Modules
+// import './App.css'; 
 
 function App() {
   return (
@@ -11,9 +15,9 @@ function App() {
       <Header />
       <main>
         <HeroSection />
-        <MenuSection /> {/* ORDEM ALTERADA: Cardápio vem antes do Sobre Nós */}
-        <AboutSection /> {/* ORDEM ALTERADA: Sobre Nós (Quem Somos) vem depois do Cardápio */}
-        {/* REMOVIDO: <TestimonialsSlider /> */} {/* Remova esta linha */}
+        <ChefBiography />   {/* Seção da biografia do chef, antes do cardápio */}
+        <MenuSection />     {/* Seção do Cardápio */}
+        <AboutSection />   {/* Seção "Sobre Nós" (apenas o texto) */}
       </main>
       <Footer />
     </div>

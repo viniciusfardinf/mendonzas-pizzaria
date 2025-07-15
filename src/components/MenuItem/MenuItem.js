@@ -1,11 +1,9 @@
-// src/components/MenuItem/MenuItem.js
 import React from 'react';
 import styles from './MenuItem.module.css';
 
 function MenuItem({ pizza }) {
   return (
     <div className={styles.menuItemCard}>
-      {/* Imagem agora ocupa o topo do card */}
       <img src={pizza.image} alt={pizza.name} className={styles.itemImage} loading="lazy" />
       <div className={styles.itemInfo}>
         <h3 className={styles.itemName}>{pizza.name}</h3>
