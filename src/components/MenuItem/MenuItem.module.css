@@ -1,106 +1,82 @@
-/* src/components/Header/Header.module.css */
-.mainHeader {
-  background-color: transparent;
-  padding: 1.5rem 0;
-  box-shadow: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 101;
-}
+/* src/components/MenuItem/MenuItem.module.css */
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.headerContainer {
+.menuItemCard {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius); /* Bordas arredondadas para o card inteiro */
+  box-shadow: var(--box-shadow);
+  padding: 0; /* Removido padding para a imagem ir até as bordas */
+  overflow: hidden; /* Importante para cortar o conteúdo (como a imagem) e respeitar o border-radius do pai */
   display: flex;
-  justify-content: flex-end; /* Alinha os botões à direita no desktop */
-  align-items: center;
+  flex-direction: column; /* Imagem acima do bloco de informações */
+  transition: transform var(--transition-speed);
 }
 
-.mainNav ul {
-  list-style: none;
-  display: flex; /* Itens em linha */
-  gap: 2rem; /* Espaçamento entre os links */
+.menuItemCard:hover {
+  transform: translateY(-5px);
 }
 
-.mainNav a {
-  text-decoration: none;
-  color: var(--secondary-color); /* Cor dourada */
-  font-weight: 700;
-  font-size: 1.1rem;
-  position: relative;
-  padding-bottom: 5px;
-  transition: color var(--transition-speed);
+.itemImage {
+  width: 100%; /* Imagem ocupa a largura total do card */
+  height: 250px; /* Altura fixa para a imagem em desktop */
+  object-fit: cover; /* A imagem irá cobrir o espaço, cortando se necessário para preencher sem deixar espaços */
+  border-top-left-radius: var(--border-radius); /* Arredonda apenas os cantos superiores da imagem */
+  border-top-right-radius: var(--border-radius); /* Arredonda apenas os cantos superiores da imagem */
+  flex-shrink: 0; /* Impede que a imagem encolha */
 }
 
-.mainNav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 3px;
-  background-color: var(--primary-color);
-  left: 0;
-  bottom: 0;
-  transition: width var(--transition-speed);
+.itemInfo {
+  flex-grow: 1; /* Permite que o bloco de informações cresça para ocupar o espaço restante */
+  text-align: left; /* Alinhamento do texto padrão */
+  padding: 1.2rem 1.2rem; /* Espaçamento interno para o texto dentro do card */
+  display: flex;
+  flex-direction: column; /* Nome, descrição e preço um abaixo do outro */
+  justify-content: space-between; /* Distribui o espaço entre os elementos de texto */
 }
 
-.mainNav a:hover {
+.itemName {
+  font-size: 1.2rem;
   color: var(--primary-color);
+  margin-bottom: 0.4rem; /* Espaçamento abaixo do nome */
 }
 
-.mainNav a:hover::after,
-.mainNav a.active::after {
-  width: 100%;
+.itemDescription {
+  font-size: 0.95rem; /* Tamanho da fonte para a descrição */
+  color: var(--text-color);
+  margin-bottom: 0.6rem; /* Espaçamento abaixo da descrição */
 }
 
-/* Media Queries para Header */
-
-/* Tablets e Mobile Landscape (paisagem) */
-@media (max-width: 768px) {
-    .mainHeader {
-        padding: 1rem 0; /* ALTERADO: Reduzi o padding vertical do header em tablets */
-    }
-
-    .headerContainer {
-        justify-content: center; /* ALTERADO: Centraliza os botões em telas de tablet */
-        flex-direction: row; /* Garante que os links continuem em linha */
-        flex-wrap: wrap; /* Permite que os links quebrem linha se houver muitos */
-        gap: 1.5rem; /* ALTERADO: Ajusta o espaçamento entre os links em tablets */
-        padding: 0 1rem; /* Adiciona um pouco de padding lateral para não colar nas bordas */
-    }
-
-    .mainNav ul {
-        gap: 1.5rem; /* ALTERADO: Garante que o gap interno da lista também seja ajustado */
-    }
-
-    .mainNav a {
-        font-size: 1rem; /* ALTERADO: Fonte levemente menor para caber melhor */
-        padding: 5px 10px; /* Adicionei padding nos links para aumentar a área clicável */ /* NOVO */
-    }
+.itemPrice {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--secondary-color); /* Cor dourada para o preço */
+  margin-top: auto; /* Empurra o preço para a parte inferior do .itemInfo se houver espaço extra */
 }
 
-/* Mobile Portrait (retrato) */
+/* Media Queries para MenuItem */
+
+/* Telas menores, como celulares em modo paisagem ou tablets pequenos */
 @media (max-width: 480px) {
-    .mainHeader {
-        padding: 0.8rem 0; /* ALTERADO: Mais compacto para celulares pequenos */
-    }
+  .menuItemCard {
+    padding: 0; /* Garante que não haja padding extra no card */
+  }
 
-    .headerContainer {
-        gap: 0.8rem; /* ALTERADO: Reduz ainda mais o espaçamento entre os links */
-        padding: 0 0.8rem; /* Ajusta o padding lateral */
-    }
+  .itemImage {
+    height: 150px; /* Reduz a altura da imagem para celulares */
+  }
 
-    .mainNav ul {
-        gap: 0.8rem; /* Reduz o gap interno da lista */
-    }
+  .itemInfo {
+    padding: 1rem; /* Ajusta o padding interno do texto para mobile */
+  }
 
-    .mainNav a {
-        font-size: 0.9rem; /* ALTERADO: Fonte menor para caber melhor */
-        padding: 3px 8px; /* Ajuste o padding para a área clicável */ /* ALTERADO */
-    }
+  .itemName {
+    font-size: 1.1rem; /* Reduz o tamanho do nome em mobile */
+  }
+
+  .itemDescription {
+    font-size: 0.85rem; /* Reduz o tamanho da descrição em mobile */
+  }
+
+  .itemPrice {
+    font-size: 1rem; /* Reduz o tamanho do preço em mobile */
+  }
 }

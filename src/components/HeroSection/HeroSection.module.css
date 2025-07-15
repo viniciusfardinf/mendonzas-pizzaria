@@ -31,7 +31,7 @@
     right: 0;
 }
 
-/* NOVO: Camada de fundo para mobile, se você usa uma imagem diferente */
+/* Camada de fundo para mobile, se você usa uma imagem diferente */
 .heroBackgroundMobile {
     display: none; /* Por padrão, oculto no desktop */
     position: absolute;
@@ -42,7 +42,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.7; /* Opacidade para o texto se destacar */
+    opacity: 0.7;
     z-index: 1;
 }
 
@@ -51,7 +51,7 @@
     max-width: 600px;
     z-index: 3;
     position: relative;
-    padding: 2rem;
+    padding: 2rem; /* Padding padrão para desktop */
 }
 
 .heroContent h1 {
@@ -87,54 +87,26 @@
 
 @media (max-width: 768px) {
     .hero {
-        /* Para mobile, o .hero se torna o contêiner da imagem de fundo */
-        min-height: 100vh; /* Ocupa a tela toda verticalmente */ /* ALTERADO */
-        padding: 0; /* Removido padding, pois a imagem de fundo já faz o preenchimento */ /* ALTERADO */
-        flex-direction: column; /* Conteúdo ainda empilhado, mas não é a principal forma de layout visual */
-        justify-content: center; /* Centraliza o conteúdo verticalmente */
+        min-height: 100vh;
+        padding: 0;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .heroImageLeft,
     .heroImageRight {
-        display: none; /* Oculta as imagens absolutas em mobile */ /* ALTERADO */
+        display: none;
     }
 
-    /* Se você quer uma imagem de fundo diferente para mobile, use este bloco: */
     .heroBackgroundMobile {
-        display: block; /* Exibe a imagem de fundo específica para mobile */
-        /* background-image já definido no inline style do JS, mas pode ser sobreposto aqui */
-        /* Opcional: ajustar opacidade aqui também se o do JS não for suficiente */
+        display: block;
     }
 
-    /* OU, se você quiser usar UMA DAS IMAGENS LATERAIS como fundo em mobile (ex: carouselImg2) */
-    /* REMOVA o bloco .heroBackgroundMobile ACIMA e DESCOMENTE e AJUSTE este bloco: */
-    /*
-    .hero {
-        background-image: url('../../assets/carousel/2.jpg'); // Usando a imagem 2 como fundo
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        min-height: 100vh;
+    .heroContent {
+        max-width: 90%;
+        padding: 4rem 1.5rem 2rem; /* ALTERADO: Adicionei padding-top para descer o texto */
         position: relative;
-    }
-    .hero::before { // Adiciona uma sobreposição escura para o texto se destacar
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(0, 0, 0, 0.6); // Escurece a imagem
-        z-index: 0;
-    }
-    .heroContent {
-        z-index: 1; // Garante que o texto fique acima da sobreposição
-    }
-    */
-
-
-    .heroContent {
-        max-width: 90%; /* Ajusta a largura do conteúdo para mobile */ /* ALTERADO */
-        padding: 2rem 1.5rem; /* Padding interno para o texto no celular */ /* ALTERADO */
-        position: relative; /* Garante que o z-index funcione */
-        z-index: 2; /* Garante que o texto esteja sobre a imagem de fundo e sobreposição */ /* ALTERADO */
+        z-index: 2;
     }
 
     .heroContent h1 {
@@ -156,6 +128,6 @@
     }
     
     .heroContent {
-        padding: 1.5rem 1rem; /* Padding ainda menor para telas muito pequenas */ /* ALTERADO */
+        padding: 3rem 1rem 1.5rem; /* ALTERADO: Ajuste o padding para telas muito pequenas */
     }
 }
