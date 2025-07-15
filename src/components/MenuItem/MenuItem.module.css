@@ -1,0 +1,78 @@
+/* src/components/MenuItem/MenuItem.module.css */
+
+.menuItemCard {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1rem; /* Reduzi o padding para compactar */ /* ALTERADO */
+  display: flex; /* Para alinhar imagem e texto lado a lado */ /* ALTERADO */
+  align-items: center; /* Alinha verticalmente */ /* ALTERADO */
+  gap: 1rem; /* Espaço entre imagem e texto */ /* ALTERADO */
+  transition: transform var(--transition-speed);
+}
+
+.menuItemCard:hover {
+  transform: translateY(-5px);
+}
+
+.itemImage {
+  width: 100px; /* ALTERADO: Largura da imagem pequena */
+  height: 100px; /* ALTERADO: Altura da imagem pequena */
+  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+  border-radius: var(--border-radius); /* Borda arredondada para a imagem */
+  flex-shrink: 0; /* Impede que a imagem encolha */
+}
+
+.itemInfo {
+  flex-grow: 1; /* Permite que as informações ocupem o espaço restante */
+  text-align: left; /* Alinha o texto à esquerda */
+}
+
+.itemName {
+  font-size: 1.2rem; /* Levemente menor */ /* ALTERADO */
+  color: var(--primary-color);
+  margin-bottom: 0.3rem; /* Espaçamento menor */ /* ALTERADO */
+}
+
+.itemDescription {
+  font-size: 0.9rem; /* Menor para compactar */ /* ALTERADO */
+  color: var(--text-color);
+  margin-bottom: 0.5rem; /* Espaçamento menor */ /* ALTERADO */
+}
+
+.itemPrice { /* NOVO: Estilos para o preço */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--secondary-color); /* Cor dourada para o preço */
+}
+
+/* Media Queries para MenuItem */
+@media (max-width: 480px) {
+  .menuItemCard {
+    flex-direction: column; /* Em mobile, imagem em cima, texto embaixo */
+    text-align: center;
+    padding: 1.2rem;
+  }
+
+  .itemImage {
+    width: 120px; /* Um pouco maior em mobile para visibilidade */
+    height: 120px;
+    margin-bottom: 0.8rem; /* Espaço abaixo da imagem */
+  }
+
+  .itemInfo {
+    text-align: center; /* Centraliza o texto em mobile */
+  }
+
+  .itemName {
+    font-size: 1.1rem;
+  }
+
+  .itemDescription {
+    font-size: 0.85rem;
+  }
+
+  .itemPrice {
+    font-size: 1rem;
+  }
+}

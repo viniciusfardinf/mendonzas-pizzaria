@@ -1,0 +1,86 @@
+/* src/components/Header/Header.module.css */
+.mainHeader {
+  background-color: transparent;
+  padding: 1.5rem 0;
+  box-shadow: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 101;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: flex-end; /* Alinha os botões à direita */
+  align-items: center;
+}
+
+.mainNav ul {
+  list-style: none; /* Garante que os bullets sejam removidos */
+  display: flex; /* Coloca os itens um ao lado do outro */
+  gap: 2rem; /* Espaçamento entre os links */
+}
+
+.mainNav a {
+  text-decoration: none;
+  color: var(--secondary-color); /* ALTERADO: Cor da fonte dourada */
+  font-weight: 700;
+  font-size: 1.1rem;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color var(--transition-speed);
+}
+
+.mainNav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color); /* Linha vermelha no hover */
+  left: 0;
+  bottom: 0;
+  transition: width var(--transition-speed);
+}
+
+.mainNav a:hover {
+  color: var(--primary-color); /* ALTERADO: Cor no hover para vermelho */
+}
+
+.mainNav a:hover::after,
+.mainNav a.active::after {
+  width: 100%;
+}
+
+/* Media Queries para Header */
+@media (max-width: 768px) {
+    .headerContainer {
+        flex-direction: row; /* Garante que continua em linha */
+        justify-content: center; /* Centraliza os botões em telas pequenas */
+        gap: 0.8rem;
+    }
+
+    .mainNav ul {
+        flex-direction: row; /* Garante que os itens continuem em linha no mobile */
+        gap: 0.8rem;
+        flex-wrap: wrap; /* Permite quebrar linha se não couberem */
+        justify-content: center;
+    }
+
+    .mainHeader {
+        padding: 1rem 0; /* Ajuste o padding para mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .mainNav a {
+        font-size: 0.95rem; /* Diminui um pouco a fonte em telas muito pequenas */
+        padding-bottom: 3px; /* Ajusta o padding para a linha */
+    }
+}

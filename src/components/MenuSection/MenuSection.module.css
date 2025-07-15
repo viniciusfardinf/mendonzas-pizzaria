@@ -1,0 +1,116 @@
+/* src/components/MenuSection/MenuSection.module.css */
+.menuSection {
+    padding: 4rem 0;
+    background-color: var(--background-light);
+    padding-bottom: 6rem; /* Espaçamento entre o menu e o rodapé */
+    text-align: center;
+}
+
+.section-title {
+    margin-bottom: 2rem; /* ALTERADO: Espaço menor para o título principal */
+}
+
+/* Estilos para os botões de filtro */
+.filterButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Espaçamento entre os botões */
+    margin-bottom: 3rem; /* Espaço abaixo dos botões e antes do título da categoria */ /* ALTERADO */
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+.filterBtn {
+    background-color: transparent;
+    border: 2px solid var(--primary-color); /* Borda vermelha */
+    color: var(--primary-color);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.filterBtn:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    transform: translateY(-2px);
+}
+
+.filterBtn.active {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.categoryTitle { /* Estilos para o título da categoria ativa */
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-top: 0; /* Removido margem superior, pois filterButtons já tem margem inferior */ /* ALTERADO */
+    margin-bottom: 2rem; /* Espaço abaixo do título da categoria */
+    text-align: center;
+}
+
+.menuGrid {
+    display: grid;
+    /* Ajuste o minmax para controlar quantas colunas visíveis */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ALTERADO: Ajustei minmax */
+    gap: 1.5rem;
+    margin-top: 0; /* Removido margin-top, categoryTitle já tem margin-bottom */
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.noItemsMessage {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-top: 2rem;
+}
+
+/* Media Queries para MenuSection */
+@media (max-width: 1024px) {
+    .filterButtons {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .filterBtn {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+    }
+    .categoryTitle {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    .menuGrid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menuSection {
+        padding: 3rem 0;
+        padding-bottom: 5rem;
+    }
+    .filterButtons {
+        flex-direction: row; /* Garante que os botões continuem em linha, quebrando se necessário */
+        justify-content: center;
+        margin-left: 1rem; /* Padding lateral para os botões */
+        margin-right: 1rem;
+    }
+    .filterBtn {
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+    }
+    .categoryTitle {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+    .menuGrid {
+        grid-template-columns: 1fr; /* Uma única coluna em mobile */
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+}

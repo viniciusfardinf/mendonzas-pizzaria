@@ -1,0 +1,135 @@
+/* src/components/Footer/Footer.module.css */
+
+/* Estilos Globais do Rodapé */
+.footer {
+  background: var(--background-dark);
+  color: var(--light-text-color);
+  padding: 1.5rem 1.5rem 0.5rem;
+  text-align: left;
+}
+
+/* Contêiner principal das colunas do rodapé */
+.footerContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para os títulos das seções do rodapé */
+.socialMediaColumn h4,
+.hoursColumn h4,
+.mapColumn h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.8rem;
+}
+
+/* Estilos para o bloco de Redes Sociais */
+.socialMediaColumn {
+    text-align: center; /* ALTERADO: Centraliza o texto e os ícones */
+}
+
+.contactText { /* NOVO: Estilo para o texto "Entre em contato..." */
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem; /* Espaço abaixo do texto antes dos ícones */ /* ALTERADO */
+}
+
+/* Contêiner dos ícones sociais no rodapé */
+.socialIconsFooter {
+  display: flex;
+  gap: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  justify-content: center; /* ALTERADO: Centraliza os ícones horizontalmente */
+}
+
+/* Estilos para os ícones do React Icons */
+.socialIconsFooter a .iconFooter {
+  width: 30px;
+  height: 30px;
+  color: var(--light-text-color);
+  transition: transform var(--transition-speed);
+}
+
+.socialIconsFooter a .iconFooter:hover {
+  transform: scale(1.1);
+  color: var(--primary-color);
+}
+
+/* Estilos para o bloco Horário de Funcionamento */
+.hoursColumn p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0;
+    margin-bottom: 0.5rem; /* ALTERADO: Margem abaixo do horário */
+}
+
+.addressText { /* NOVO: Estilo para o nome da rua */
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Estilos para o container do mapa */
+.mapColumn iframe {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  height: 200px; /* ALTERADO: Voltei para 200px */
+  display: block;
+  margin-top: 0;
+}
+
+/* Direitos Autorais */
+.copyright {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Media Queries para Responsividade do Rodapé */
+@media (max-width: 768px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .socialMediaColumn,
+  .hoursColumn,
+  .mapColumn {
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  /* .socialIconsFooter já tem justify-content: center; então não precisa repetir aqui */
+
+  .hoursColumn p,
+  .addressText { /* ALTERADO: Incluí addressText aqui */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+  }
+
+  .mapColumn iframe {
+      height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+    .socialMediaColumn h4,
+    .hoursColumn h4,
+    .mapColumn h4 {
+        font-size: 1.4rem;
+    }
+    .hoursColumn p,
+    .addressText { /* ALTERADO: Incluí addressText aqui */
+        font-size: 0.9rem;
+    }
+}

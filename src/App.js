@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './components/Header/Header';
+import HeroSection from './components/HeroSection/HeroSection';
+import AboutSection from './components/AboutSection/AboutSection'; // Manteremos AboutSection para o "Quem Somos"
+import MenuSection from './components/MenuSection/MenuSection';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <main>
+        <HeroSection />
+        <MenuSection /> {/* ORDEM ALTERADA: Cardápio vem antes do Sobre Nós */}
+        <AboutSection /> {/* ORDEM ALTERADA: Sobre Nós (Quem Somos) vem depois do Cardápio */}
+        {/* REMOVIDO: <TestimonialsSlider /> */} {/* Remova esta linha */}
+      </main>
+      <Footer />
     </div>
   );
 }
