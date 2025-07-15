@@ -2,12 +2,12 @@
 
 .menuItemCard {
   background-color: var(--card-background);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius); /* Rounded corners for the entire card */
   box-shadow: var(--box-shadow);
-  padding: 1rem; /* Reduzi o padding para compactar */ /* ALTERADO */
-  display: flex; /* Para alinhar imagem e texto lado a lado */ /* ALTERADO */
-  align-items: center; /* Alinha verticalmente */ /* ALTERADO */
-  gap: 1rem; /* Espaço entre imagem e texto */ /* ALTERADO */
+  padding: 0;
+  overflow: hidden; /* Important to clip content (like the image) to the card's border-radius */
+  display: flex;
+  flex-direction: column; /* Image above text */
   transition: transform var(--transition-speed);
 }
 
@@ -16,52 +16,55 @@
 }
 
 .itemImage {
-  width: 100px; /* ALTERADO: Largura da imagem pequena */
-  height: 100px; /* ALTERADO: Altura da imagem pequena */
-  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-  border-radius: var(--border-radius); /* Borda arredondada para a imagem */
-  flex-shrink: 0; /* Impede que a imagem encolha */
+  width: 100%;
+  height: 250px; /* Keep the height the same as before to define the square space */
+  object-fit: cover; /* ALTERADO: Image will cover the entire space, cropping if necessary */
+  /* NO LONGER NEEDED: background-color: #f0f0f0; (as there will be no empty space) */
+  border-top-left-radius: var(--border-radius); /* Keep rounded top corners */
+  border-top-right-radius: var(--border-radius); /* Keep rounded top corners */
+  flex-shrink: 0;
 }
 
 .itemInfo {
-  flex-grow: 1; /* Permite que as informações ocupem o espaço restante */
-  text-align: left; /* Alinha o texto à esquerda */
+  flex-grow: 1;
+  text-align: left;
+  padding: 1.2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .itemName {
-  font-size: 1.2rem; /* Levemente menor */ /* ALTERADO */
+  font-size: 1.2rem;
   color: var(--primary-color);
-  margin-bottom: 0.3rem; /* Espaçamento menor */ /* ALTERADO */
+  margin-bottom: 0.4rem;
 }
 
 .itemDescription {
-  font-size: 0.9rem; /* Menor para compactar */ /* ALTERADO */
+  font-size: 0.95rem;
   color: var(--text-color);
-  margin-bottom: 0.5rem; /* Espaçamento menor */ /* ALTERADO */
+  margin-bottom: 0.6rem;
 }
 
-.itemPrice { /* NOVO: Estilos para o preço */
+.itemPrice {
   font-size: 1.1rem;
   font-weight: bold;
-  color: var(--secondary-color); /* Cor dourada para o preço */
+  color: var(--secondary-color);
+  margin-top: auto;
 }
 
-/* Media Queries para MenuItem */
+/* Media Queries for MenuItem */
 @media (max-width: 480px) {
   .menuItemCard {
-    flex-direction: column; /* Em mobile, imagem em cima, texto embaixo */
-    text-align: center;
-    padding: 1.2rem;
+    padding: 0;
   }
 
   .itemImage {
-    width: 120px; /* Um pouco maior em mobile para visibilidade */
-    height: 120px;
-    margin-bottom: 0.8rem; /* Espaço abaixo da imagem */
+    height: 200px; /* Height for mobile */
   }
 
   .itemInfo {
-    text-align: center; /* Centraliza o texto em mobile */
+    padding: 1rem;
   }
 
   .itemName {
