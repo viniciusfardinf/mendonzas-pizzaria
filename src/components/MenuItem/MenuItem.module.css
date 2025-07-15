@@ -1,81 +1,106 @@
-/* src/components/MenuItem/MenuItem.module.css */
-
-.menuItemCard {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius); /* Rounded corners for the entire card */
-  box-shadow: var(--box-shadow);
-  padding: 0;
-  overflow: hidden; /* Important to clip content (like the image) to the card's border-radius */
-  display: flex;
-  flex-direction: column; /* Image above text */
-  transition: transform var(--transition-speed);
-}
-
-.menuItemCard:hover {
-  transform: translateY(-5px);
-}
-
-.itemImage {
+/* src/components/Header/Header.module.css */
+.mainHeader {
+  background-color: transparent;
+  padding: 1.5rem 0;
+  box-shadow: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 250px; /* Keep the height the same as before to define the square space */
-  object-fit: cover; /* ALTERADO: Image will cover the entire space, cropping if necessary */
-  /* NO LONGER NEEDED: background-color: #f0f0f0; (as there will be no empty space) */
-  border-top-left-radius: var(--border-radius); /* Keep rounded top corners */
-  border-top-right-radius: var(--border-radius); /* Keep rounded top corners */
-  flex-shrink: 0;
+  z-index: 101;
 }
 
-.itemInfo {
-  flex-grow: 1;
-  text-align: left;
-  padding: 1.2rem 1.2rem;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.headerContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end; /* Alinha os botões à direita no desktop */
+  align-items: center;
 }
 
-.itemName {
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin-bottom: 0.4rem;
+.mainNav ul {
+  list-style: none;
+  display: flex; /* Itens em linha */
+  gap: 2rem; /* Espaçamento entre os links */
 }
 
-.itemDescription {
-  font-size: 0.95rem;
-  color: var(--text-color);
-  margin-bottom: 0.6rem;
-}
-
-.itemPrice {
+.mainNav a {
+  text-decoration: none;
+  color: var(--secondary-color); /* Cor dourada */
+  font-weight: 700;
   font-size: 1.1rem;
-  font-weight: bold;
-  color: var(--secondary-color);
-  margin-top: auto;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color var(--transition-speed);
 }
 
-/* Media Queries for MenuItem */
+.mainNav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  left: 0;
+  bottom: 0;
+  transition: width var(--transition-speed);
+}
+
+.mainNav a:hover {
+  color: var(--primary-color);
+}
+
+.mainNav a:hover::after,
+.mainNav a.active::after {
+  width: 100%;
+}
+
+/* Media Queries para Header */
+
+/* Tablets e Mobile Landscape (paisagem) */
+@media (max-width: 768px) {
+    .mainHeader {
+        padding: 1rem 0; /* ALTERADO: Reduzi o padding vertical do header em tablets */
+    }
+
+    .headerContainer {
+        justify-content: center; /* ALTERADO: Centraliza os botões em telas de tablet */
+        flex-direction: row; /* Garante que os links continuem em linha */
+        flex-wrap: wrap; /* Permite que os links quebrem linha se houver muitos */
+        gap: 1.5rem; /* ALTERADO: Ajusta o espaçamento entre os links em tablets */
+        padding: 0 1rem; /* Adiciona um pouco de padding lateral para não colar nas bordas */
+    }
+
+    .mainNav ul {
+        gap: 1.5rem; /* ALTERADO: Garante que o gap interno da lista também seja ajustado */
+    }
+
+    .mainNav a {
+        font-size: 1rem; /* ALTERADO: Fonte levemente menor para caber melhor */
+        padding: 5px 10px; /* Adicionei padding nos links para aumentar a área clicável */ /* NOVO */
+    }
+}
+
+/* Mobile Portrait (retrato) */
 @media (max-width: 480px) {
-  .menuItemCard {
-    padding: 0;
-  }
+    .mainHeader {
+        padding: 0.8rem 0; /* ALTERADO: Mais compacto para celulares pequenos */
+    }
 
-  .itemImage {
-    height: 200px; /* Height for mobile */
-  }
+    .headerContainer {
+        gap: 0.8rem; /* ALTERADO: Reduz ainda mais o espaçamento entre os links */
+        padding: 0 0.8rem; /* Ajusta o padding lateral */
+    }
 
-  .itemInfo {
-    padding: 1rem;
-  }
+    .mainNav ul {
+        gap: 0.8rem; /* Reduz o gap interno da lista */
+    }
 
-  .itemName {
-    font-size: 1.1rem;
-  }
-
-  .itemDescription {
-    font-size: 0.85rem;
-  }
-
-  .itemPrice {
-    font-size: 1rem;
-  }
+    .mainNav a {
+        font-size: 0.9rem; /* ALTERADO: Fonte menor para caber melhor */
+        padding: 3px 8px; /* Ajuste o padding para a área clicável */ /* ALTERADO */
+    }
 }

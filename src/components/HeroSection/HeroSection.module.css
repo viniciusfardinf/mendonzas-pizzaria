@@ -31,6 +31,22 @@
     right: 0;
 }
 
+/* NOVO: Camada de fundo para mobile, se você usa uma imagem diferente */
+.heroBackgroundMobile {
+    display: none; /* Por padrão, oculto no desktop */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7; /* Opacidade para o texto se destacar */
+    z-index: 1;
+}
+
+
 .heroContent {
     max-width: 600px;
     z-index: 3;
@@ -65,35 +81,60 @@
     }
 }
 
+/* ---------------------------------------------------------------------- */
+/* LAYOUT PARA CELULARES (max-width: 768px e 480px) */
+/* ---------------------------------------------------------------------- */
+
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column;
-        min-height: auto; /* Permite que a altura se ajuste ao conteúdo */ /* ALTERADO */
-        padding: 4rem 1.5rem; /* Padding para o conteúdo principal */
+        /* Para mobile, o .hero se torna o contêiner da imagem de fundo */
+        min-height: 100vh; /* Ocupa a tela toda verticalmente */ /* ALTERADO */
+        padding: 0; /* Removido padding, pois a imagem de fundo já faz o preenchimento */ /* ALTERADO */
+        flex-direction: column; /* Conteúdo ainda empilhado, mas não é a principal forma de layout visual */
+        justify-content: center; /* Centraliza o conteúdo verticalmente */
     }
 
     .heroImageLeft,
     .heroImageRight {
-        position: static; /* Volta para o fluxo normal */
-        width: 100%;
-        height: auto; /* ALTERADO: Altura automática para manter a proporção da imagem */
-        max-height: 300px; /* NOVO: Define uma altura máxima para a imagem em tablets */
-        opacity: 1;
-        margin-bottom: 2rem;
-        object-fit: cover; /* Mantém o corte, mas tenta preencher */
+        display: none; /* Oculta as imagens absolutas em mobile */ /* ALTERADO */
     }
 
-    .heroImageRight {
-        order: -1;
-        margin-bottom: 0;
+    /* Se você quer uma imagem de fundo diferente para mobile, use este bloco: */
+    .heroBackgroundMobile {
+        display: block; /* Exibe a imagem de fundo específica para mobile */
+        /* background-image já definido no inline style do JS, mas pode ser sobreposto aqui */
+        /* Opcional: ajustar opacidade aqui também se o do JS não for suficiente */
     }
-    .heroImageLeft {
-        margin-bottom: 2rem;
+
+    /* OU, se você quiser usar UMA DAS IMAGENS LATERAIS como fundo em mobile (ex: carouselImg2) */
+    /* REMOVA o bloco .heroBackgroundMobile ACIMA e DESCOMENTE e AJUSTE este bloco: */
+    /*
+    .hero {
+        background-image: url('../../assets/carousel/2.jpg'); // Usando a imagem 2 como fundo
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        position: relative;
     }
+    .hero::before { // Adiciona uma sobreposição escura para o texto se destacar
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6); // Escurece a imagem
+        z-index: 0;
+    }
+    .heroContent {
+        z-index: 1; // Garante que o texto fique acima da sobreposição
+    }
+    */
+
 
     .heroContent {
-        max-width: 100%;
-        padding: 0;
+        max-width: 90%; /* Ajusta a largura do conteúdo para mobile */ /* ALTERADO */
+        padding: 2rem 1.5rem; /* Padding interno para o texto no celular */ /* ALTERADO */
+        position: relative; /* Garante que o z-index funcione */
+        z-index: 2; /* Garante que o texto esteja sobre a imagem de fundo e sobreposição */ /* ALTERADO */
     }
 
     .heroContent h1 {
@@ -113,14 +154,8 @@
     .heroContent p {
         font-size: 1rem;
     }
-
-    .heroImageLeft,
-    .heroImageRight {
-        height: auto; /* Continua automática */ /* ALTERADO */
-        max-height: 250px; /* NOVO: Altura máxima para celulares pequenos */
-    }
-
-    .hero {
-        padding: 3rem 1rem; /* Reduz o padding geral da seção para telas menores */ /* NOVO */
+    
+    .heroContent {
+        padding: 1.5rem 1rem; /* Padding ainda menor para telas muito pequenas */ /* ALTERADO */
     }
 }
