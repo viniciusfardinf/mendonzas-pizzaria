@@ -1,80 +1,173 @@
 /* src/components/MenuItem/MenuItem.module.css */
 
-.menuItemCard {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius); /* Bordas arredondadas para o card inteiro */
-  box-shadow: var(--box-shadow);
-  padding: 0; /* Removido padding para a imagem ir até as bordas */
-  overflow: hidden; /* Importante para cortar o conteúdo (como a imagem) e respeitar o border-radius do pai */
+/*
+  Variáveis globais assumidas de GlobalStyles.css:
+  --color-primary, --color-secondary, --color-text-dark, --color-card-background,
+  --border-radius-md, --shadow-md, --shadow-lg, --shadow-sm,
+  --transition-speed-normal,
+  --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl,
+  --font-family-heading, --font-family-body
+*/
+
+.menuItem {
+  background-color: var(--color-card-background); /* Fundo branco/claro para o card */
+  border-radius: var(--border-radius-md); /* Bordas arredondadas */
+  box-shadow: var(--shadow-md); /* Sombra suave para profundidade */
   display: flex;
-  flex-direction: column; /* Imagem acima do bloco de informações */
-  transition: transform var(--transition-speed);
+  flex-direction: column; /* Imagem em cima, conteúdo em baixo */
+  overflow: hidden; /* Garante que a imagem e bordas arredondadas funcionem bem */
+  transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
 }
 
-.menuItemCard:hover {
-  transform: translateY(-5px);
+.menuItem:hover {
+  transform: translateY(-8px); /* Efeito de "levantar" um pouco mais ao passar o mouse */
+  box-shadow: var(--shadow-lg); /* Sombra mais intensa no hover */
+}
+
+.menuItem:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.itemImageContainer {
+  width: 100%;
+  height: 200px; /* Altura da imagem para dar mais espaço ao card */
+  overflow: hidden;
+  position: relative;
 }
 
 .itemImage {
-  width: 100%; /* Imagem ocupa a largura total do card */
-  height: 250px; /* Altura fixa para a imagem em desktop */
-  object-fit: cover; /* A imagem irá cobrir o espaço, cortando se necessário para preencher sem deixar espaços */
-  border-top-left-radius: var(--border-radius); /* Arredonda apenas os cantos superiores da imagem */
-  border-top-right-radius: var(--border-radius); /* Arredonda apenas os cantos superiores da imagem */
-  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantido 'cover' */
+  display: block;
+  transition: transform var(--transition-speed-normal) ease-in-out;
+  background-color: #f8f9fa; /* Fundo claro para imagens com transparência */
 }
 
-.itemInfo {
-  flex-grow: 1; /* Permite que o bloco de informações cresça para ocupar o espaço restante */
-  text-align: left; /* Alinhamento do texto padrão */
-  padding: 1.2rem 1.2rem; /* Espaçamento interno para o texto dentro do card */
+.menuItem:hover .itemImage {
+  transform: scale(1.05); /* Zoom menor para ser mais sutil */
+}
+
+.itemTags {
+  display: none; /* Esconde as tags */
+}
+
+.itemContent {
+  padding: var(--spacing-md); /* Mantém o padding interno */
   display: flex;
-  flex-direction: column; /* Nome, descrição e preço um abaixo do outro */
-  justify-content: space-between; /* Distribui o espaço entre os elementos de texto */
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between; /* Espalha o conteúdo verticalmente */
 }
 
-.itemName {
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin-bottom: 0.4rem; /* Espaçamento abaixo do nome */
+.itemHeader {
+  display: flex;
+  flex-direction: column; /* Itens empilhados (nome e preço) */
+  align-items: flex-start; /* Alinha o nome e preço à esquerda */
+  margin-bottom: var(--spacing-sm);
+}
+
+.itemHeader .itemName {
+  font-family: var(--font-family-heading);
+  font-size: 1.4rem;
+  color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.2;
+  width: 100%;
+}
+
+.itemHeader .itemPrice {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+  margin: var(--spacing-xs) 0 0 0;
+  width: 100%;
+  text-align: left;
+  white-space: normal; /* Permite quebra de linha para preços longos */
+  word-break: break-word; /* Garante que palavras muito longas também quebrem */
 }
 
 .itemDescription {
-  font-size: 0.95rem; /* Tamanho da fonte para a descrição */
-  color: var(--text-color);
-  margin-bottom: 0.6rem; /* Espaçamento abaixo da descrição */
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
-.itemPrice {
-  font-size: 1.1rem;
+/* Estilo para a mensagem de erro */
+.errorContainer {
+  padding: var(--spacing-md);
+  color: var(--color-primary);
+  background-color: #ffe0e0;
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--border-radius-md);
+  text-align: center;
   font-weight: bold;
-  color: var(--secondary-color); /* Cor dourada para o preço */
-  margin-top: auto; /* Empurra o preço para a parte inferior do .itemInfo se houver espaço extra */
+  margin: 1rem auto;
+  max-width: 300px;
 }
 
-/* Media Queries para MenuItem */
-@media (max-width: 480px) {
-  .menuItemCard {
-    padding: 0; /* Garante que não haja padding extra no card */
+/* Media Queries para Responsividade do MenuItem */
+@media (max-width: 1024px) {
+  .itemImageContainer {
+    height: 180px;
   }
-
-  .itemImage {
-    height: 150px; /* Reduz a altura da imagem para celulares */
+  .itemHeader .itemName {
+    font-size: 1.3rem;
   }
-
-  .itemInfo {
-    padding: 1rem; /* Ajusta o padding interno do texto para mobile */
+  .itemHeader .itemPrice {
+    font-size: 1.3rem;
   }
-
-  .itemName {
-    font-size: 1.1rem; /* Reduz o tamanho do nome em mobile */
-  }
-
   .itemDescription {
-    font-size: 0.85rem; /* Reduz o tamanho da descrição em mobile */
+    font-size: 0.8rem;
+    -webkit-line-clamp: 3;
   }
+}
 
-  .itemPrice {
-    font-size: 1rem; /* Reduz o tamanho do preço em mobile */
+@media (max-width: 768px) {
+  .itemImageContainer {
+    height: 160px;
+  }
+  .itemContent {
+    padding: var(--spacing-sm);
+  }
+  .itemHeader .itemName {
+    font-size: 1.2rem;
+  }
+  .itemHeader .itemPrice {
+    font-size: 1.2rem;
+  }
+  .itemDescription {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .itemImageContainer {
+    height: 130px;
+  }
+  .itemContent {
+    padding: var(--spacing-xs);
+  }
+  .itemHeader .itemName {
+    font-size: 1rem;
+  }
+  .itemHeader .itemPrice {
+    font-size: 1rem;
+  }
+  .itemDescription {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2;
   }
 }

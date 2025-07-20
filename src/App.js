@@ -6,8 +6,9 @@ import {
   HeroSection,
   ChefBiography,
   MenuSection,
+  // AboutSection, // Removido: O componente AboutSection
   Footer
-} from './components'; 
+} from './components';
 
 function App() {
   return (

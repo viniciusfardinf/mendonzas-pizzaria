@@ -1,114 +1,204 @@
 /* src/components/MenuSection/MenuSection.module.css */
+
+/*
+  Variáveis globais assumidas de GlobalStyles.css:
+  --color-primary, --color-secondary, --color-text-dark, --color-text-light,
+  --border-radius-md, --border-radius-pill, --shadow-sm, --shadow-md,
+  --transition-speed-normal, --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg,
+  --font-family-heading, --font-family-body, --container-max-width,
+  --color-primary-rgb (para uso com rgba)
+*/
+
 .menuSection {
-    padding: 4rem 0;
-    background-color: var(--background-light);
-    padding-bottom: 6rem; /* Espaçamento entre o menu e o rodapé */
-    text-align: center; /* Centraliza o título principal */
+  padding: var(--spacing-xxl) 0;
+  background-color: transparent;
+  color: var(--color-text-dark);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 
-.section-title {
-    margin-bottom: 2rem;
+/* Removido .section-title */
+
+.menuSection > * {
+  position: relative;
+  z-index: 1;
 }
 
-.filterButtons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+/* Estilos para os Botões de Categoria */
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-md);
 }
 
-.filterBtn {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 0.8rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all var(--transition-speed);
+.categoryButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-pill);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-family: var(--font-family-body);
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-speed-normal) ease;
+  box-shadow: var(--shadow-sm);
 }
 
-.filterBtn:hover {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    transform: translateY(-2px);
+.categoryButton:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+  border-color: var(--color-secondary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
-.filterBtn.active {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.categoryButton.active {
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+
+/* Estilos para as Seções de Categoria Individuais (sem fundo) */
+.menuCategory {
+  margin-bottom: 5rem;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  border-radius: var(--border-radius-md);
 }
 
 .categoryTitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--secondary-color);
-    margin-top: 0;
-    margin-bottom: 2rem;
-    text-align: center;
+  font-family: var(--font-family-heading);
+  font-size: 2.8rem;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  position: relative;
+  padding-bottom: var(--spacing-sm);
 }
 
-.menuGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste o minmax para controlar quantas colunas visíveis */
-    gap: 1.5rem;
-    margin-top: 0;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+.categoryTitle::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-primary);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  border-radius: var(--border-radius-sm);
 }
 
-.noItemsMessage {
-    font-size: 1.1rem;
-    color: var(--text-color);
-    margin-top: 2rem;
+/* GRID de ITENS com espaçamento entre cards e padding nas bordas */
+.menuItemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  justify-content: center;
 }
 
-/* Media Queries para MenuSection */
+/* Estilos para as mensagens de erro/sem itens */
+.errorMessage, .noItemsMessage {
+  color: var(--color-text-dark);
+  background-color: #ffe0e0;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  font-weight: bold;
+  margin: var(--spacing-md) auto;
+  max-width: 600px;
+  border: 1px solid var(--color-primary);
+}
+
+/* Media Queries para Responsividade */
 @media (max-width: 1024px) {
-    .filterButtons {
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-    .filterBtn {
-        padding: 0.7rem 1.5rem;
-        font-size: 1rem;
-    }
-    .categoryTitle {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-    .menuGrid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.2rem;
-    }
+  .menuSection {
+    padding: var(--spacing-xxl) 0;
+  }
+  .categoryButtons {
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+  }
+  .categoryButton {
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .menuCategory {
+    margin-bottom: 4rem;
+  }
+  .categoryTitle {
+    font-size: 2.5rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
 }
 
 @media (max-width: 768px) {
-    .menuSection {
-        padding: 3rem 0;
-        padding-bottom: 5rem;
-    }
-    .filterButtons {
-        flex-direction: row;
-        justify-content: center;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-    .filterBtn {
-        font-size: 0.95rem;
-        padding: 0.6rem 1.2rem;
-    }
-    .categoryTitle {
-        font-size: 1.6rem;
-        margin-bottom: 1rem;
-    }
-    .menuGrid {
-        grid-template-columns: 1fr; /* Uma única coluna em mobile */
-        gap: 1rem;
-        padding: 0 1rem;
-    }
+  .menuSection {
+    padding: var(--spacing-lg) 0;
+  }
+  .categoryButtons {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-sm);
+  }
+  .categoryButton {
+    font-size: 0.95rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  .menuCategory {
+    margin-bottom: 3rem;
+  }
+  .categoryTitle {
+    font-size: 2.2rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .menuSection {
+    padding: var(--spacing-md) 0;
+  }
+  .categoryButtons {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    padding: 0 var(--spacing-xs);
+  }
+  .categoryButton {
+    font-size: 0.95rem;
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+  .menuCategory {
+    margin-bottom: 2rem;
+  }
+  .categoryTitle {
+    font-size: 1.8rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
 }
