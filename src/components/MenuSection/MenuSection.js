@@ -1,101 +1,139 @@
-// src/components/MenuSection/MenuSection.js
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Importa axios para fazer requisições HTTP
+import styles from './MenuSection.module.css';
 import MenuItem from '../MenuItem/MenuItem';
-import menuData from '../../data/menu.json'; // Importa seu arquivo JSON de dados do menu
-import styles from './MenuSection.module.css'; // Importa o CSS Module
-
-// ... (código imageMap, se estiver no mesmo arquivo ou importado) ...
 
 function MenuSection() {
-  const [menuCategories, setMenuCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('salgada'); // Estado para a categoria ativa, padrão 'salgada'
+  const [menuItems, setMenuItems] = useState([]); // Estado para armazenar os itens do menu puxados do Strapi
+  const [loading, setLoading] = useState(true); // Estado de carregamento para mostrar "Carregando..."
+  const [error, setError] = useState(null); // Estado para erros na requisição
+
+  // IMPORTANTE: URL da sua API Strapi. Endpoint agora é 'pizza-items'.
+  const STRAPI_API_URL = 'http://localhost:1337/api/pizza-items'; 
 
   useEffect(() => {
-    try {
-      setMenuCategories(menuData);
-      setLoading(false);
-      if (menuData.length > 0) {
-        setActiveCategory(menuData[0].category);
-      }
-    } catch (err) {
-      console.error("[MenuSection] Erro fatal ao carregar ou processar o cardápio:", err);
-      setError("Erro ao carregar o cardápio. Por favor, verifique o arquivo menu.json.");
-      setLoading(false);
-    }
-  }, []);
+    const fetchMenuItems = async () => {
+      try {
+        setLoading(true); // Inicia o estado de carregamento
+        setError(null); // Limpa qualquer erro anterior
 
+        // Faz a requisição GET para a API do Strapi.
+        // O '?populate=*' é crucial para que as URLs das imagens sejam incluídas na resposta.
+        const response = await axios.get(`${STRAPI_API_URL}?populate=*`);
+        
+        // O Strapi V4+ retorna os dados dentro de 'data' e os atributos dos campos dentro de 'attributes'.
+        const formattedItems = response.data.data.map(item => ({
+          id: item.id, // O ID do item no Strapi
+          name: item.attributes.name,
+          description: item.attributes.description,
+          price: item.attributes.price,
+          category: item.attributes.category,
+          // Verifica se a imagem existe e constrói a URL completa.
+          // A URL da imagem do Strapi geralmente é relativa, então concatenamos com a base URL do Strapi.
+          image: item.attributes.image.data 
+                 ? `http://localhost:1337${item.attributes.image.data.attributes.url}` 
+                 : 'https://via.placeholder.com/150?text=Sem+Imagem' // Placeholder caso não tenha imagem
+        }));
+        
+        setMenuItems(formattedItems); // Atualiza o estado com os itens formatados
+      } catch (err) {
+        console.error("Erro ao buscar itens do menu do Strapi:", err);
+        // Mensagem de erro amigável para o usuário
+        setError("Não foi possível carregar o cardápio no momento. Por favor, tente novamente mais tarde ou entre em contato.");
+      } finally {
+        setLoading(false); // Finaliza o estado de carregamento, mesmo em caso de erro
+      }
+    };
+
+    fetchMenuItems(); // Chama a função para buscar os itens quando o componente é montado
+  }, []); // O array de dependências vazio [] garante que este useEffect roda apenas uma vez (na montagem)
+
+  // Filtra os itens do cardápio com base na categoria ativa
+  const filteredItems = menuItems.filter(item => item.category === activeCategory);
+
+  // Mapeamento de categorias para nomes exibíveis nos botões e título
+  const categoryNames = {
+    salgada: "Pizzas Salgadas",
+    doce: "Pizzas Doces",
+    bebida: "Bebidas"
+  };
+
+  // Renderização condicional: mostra mensagem de carregamento, erro ou itens vazios
   if (loading) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
-        {/* <h2 className="section-title">Nosso Cardápio</h2> REMOVIDO: Título principal da seção */}
-        <p>Carregando cardápio...</p>
+      <section id="menu" className={styles.menuSection}>
+        <div className="container">
+          <p className={styles.loadingMessage}>Carregando cardápio...</p>
+        </div>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
-        {/* <h2 className="section-title">Nosso Cardápio</h2> REMOVIDO: Título principal da seção */}
-        <p className={styles.errorMessage}>Erro: {error}</p>
+      <section id="menu" className={styles.menuSection}>
+        <div className="container">
+          <p className={styles.errorMessage}>{error}</p>
+        </div>
       </section>
     );
   }
 
-  if (menuCategories.length === 0 || menuCategories.every(cat => !cat.items || cat.items.length === 0)) {
+  // Se não há itens depois de carregar e sem erro
+  if (menuItems.length === 0) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
-        {/* <h2 className="section-title">Nosso Cardápio</h2> REMOVIDO: Título principal da seção */}
-        <p className={styles.noItemsMessage}>Nenhum item de cardápio disponível no momento.</p>
+      <section id="menu" className={styles.menuSection}>
+        <div className="container">
+          <h2 className="section-title">Nosso Cardápio</h2>
+          <p className={styles.noItemsMessage}>Nenhum item disponível no cardápio no momento. Por favor, adicione itens no Strapi.</p>
+        </div>
       </section>
     );
   }
 
-  const allCategories = menuCategories.map(cat => cat.category);
-
-  const filteredCategories = activeCategory
-    ? menuCategories.filter(cat => cat.category === activeCategory)
-    : menuCategories;
-
+  // Renderiza o cardápio completo se tudo carregou com sucesso
   return (
-    <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
-      {/* <h2 className="section-title">Nosso Cardápio</h2> REMOVIDO: Título principal da seção */}
+    <section id="menu" className={styles.menuSection}>
+      <div className="container">
+        <h2 className="section-title">Nosso Cardápio</h2>
 
-      <div className={styles.categoryButtons}>
-        {allCategories.map(category => (
+        {/* Botões de Filtro */}
+        <div className={styles.filterButtons}>
           <button
-            key={category}
-            className={`${styles.categoryButton} ${activeCategory === category ? styles.active : ''}`}
-            onClick={() => setActiveCategory(category)}
+            className={`${styles.filterBtn} ${activeCategory === 'salgada' ? styles.active : ''}`}
+            onClick={() => setActiveCategory('salgada')}
           >
-            {category}
+            Salgadas
           </button>
-        ))}
+          <button
+            className={`${styles.filterBtn} ${activeCategory === 'doce' ? styles.active : ''}`}
+            onClick={() => setActiveCategory('doce')}
+          >
+            Doces
+          </button>
+          <button
+            className={`${styles.filterBtn} ${activeCategory === 'bebida' ? styles.active : ''}`}
+            onClick={() => setActiveCategory('bebida')}
+          >
+            Bebidas
+          </button>
+        </div>
+
+        {/* Título da Categoria Ativa */}
+        <h3 className={styles.categoryTitle}>{categoryNames[activeCategory]}</h3>
+
+        {/* Grid de Itens Filtrados */}
+        <div className={styles.menuGrid}>
+          {filteredItems.map((item) => (
+            <MenuItem key={item.id} pizza={item} />
+          ))}
+        </div>
+
+        {filteredItems.length === 0 && (
+          <p className={styles.noItemsMessage}>Nenhum item nesta categoria por enquanto.</p>
+        )}
       </div>
-
-      {filteredCategories.length === 0 && activeCategory && (
-        <p className={styles.noItemsMessage}>Nenhum item na categoria "{activeCategory}" no momento.</p>
-      )}
-
-      {filteredCategories.map(categoryData => (
-        (activeCategory === categoryData.category || !activeCategory) && (
-          <div key={categoryData.category} className={styles.menuCategory}>
-            {/* Mantemos o título da categoria, apenas removemos o título geral da seção */}
-            <h3 className={styles.categoryTitle}>{categoryData.category}</h3>
-            <div className={styles.menuItemsGrid}>
-              {categoryData.items.map(item => (
-                <MenuItem
-                  key={item.id}
-                  item={item}
-                />
-              ))}
-            </div>
-          </div>
-        )
-      ))}
     </section>
   );
 }

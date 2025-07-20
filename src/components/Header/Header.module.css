@@ -1,13 +1,4 @@
 /* src/components/Header/Header.module.css */
-
-/*
-  Variáveis globais assumidas de GlobalStyles.css:
-  --color-primary, --color-secondary, --color-text-dark, --color-text-light,
-  --border-radius-md, --border-radius-pill, --shadow-sm, --shadow-md,
-  --transition-speed-normal, --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg,
-  --font-family-heading, --font-family-body, --container-max-width
-*/
-
 .mainHeader {
   background-color: transparent; /* Fundo transparente */
   padding: 1.5rem 0; /* Espaçamento vertical */
@@ -20,58 +11,51 @@
 }
 
 .container {
-  max-width: var(--container-max-width); /* Usando variável global */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md); /* Padding lateral usando variável global */
+  padding: 0 1.5rem;
 }
 
 .headerContainer {
   display: flex;
-  justify-content: flex-end; /* Alinha os itens (navegação) à direita */
+  justify-content: flex-end; /* Alinha os botões à direita no desktop */
   align-items: center;
-}
-
-/* Opcional: Estilo para um logo, se você adicionar um div.logo no JSX */
-.logo {
-    font-family: var(--font-family-heading);
-    font-size: 2.5rem;
-    color: var(--color-primary); /* Use a cor primária para o logo */
-    margin-right: auto; /* Empurra a navegação para a direita */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra para visibilidade */
 }
 
 .mainNav ul {
   list-style: none; /* Remove bullets */
   display: flex; /* Itens em linha */
-  gap: var(--spacing-md); /* Espaçamento entre os links, ajustado */
+  gap: 2rem; /* Espaçamento entre os links */
 }
 
 .mainNav a {
   text-decoration: none;
-  background-color: rgba(var(--color-primary-rgb, 220, 53, 69), 0.85); /* Fundo vermelho semi-transparente */
-  color: var(--color-text-light); /* Fonte branca */
+  color: var(--secondary-color); /* Cor dourada */
   font-weight: 700;
-  font-size: 1rem; /* Tamanho da fonte */
-  padding: var(--spacing-sm) var(--spacing-md); /* Padding para os botões */
-  border-radius: var(--border-radius-pill); /* Borda ARREDONDADA (pílula) */
-  transition: all var(--transition-speed-normal) ease; /* Transição para todas as propriedades */
-  box-shadow: var(--shadow-sm); /* Sombra sutil */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra no texto para visibilidade */
+  font-size: 1.1rem;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color var(--transition-speed);
+}
+
+.mainNav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  left: 0;
+  bottom: 0;
+  transition: width var(--transition-speed);
 }
 
 .mainNav a:hover {
-  background-color: var(--color-secondary); /* Fundo dourado no hover */
-  color: var(--color-text-dark); /* Texto escuro no hover */
-  box-shadow: var(--shadow-md); /* Sombra mais intensa no hover */
-  transform: translateY(-2px); /* Efeito sutil de lift */
+  color: var(--primary-color);
 }
 
-/* Remover os pseudo-elementos ::after para botões arredondados, pois não há sublinhado */
-.mainNav a::after {
-    display: none;
-}
+.mainNav a:hover::after,
 .mainNav a.active::after {
-    display: none;
+  width: 100%;
 }
 
 /* Media Queries para Header */
@@ -79,60 +63,44 @@
 /* Tablets e Mobile Landscape (paisagem) */
 @media (max-width: 768px) {
     .mainHeader {
-        padding: 1rem 0;
-    }
-
-    .container {
-        padding: 0 var(--spacing-sm); /* Ajusta padding lateral */
+        padding: 1rem 0; /* Reduzi o padding vertical do header em tablets */
     }
 
     .headerContainer {
         justify-content: center; /* Centraliza os botões em telas de tablet */
+        flex-direction: row; /* Garante que os links continuem em linha */
         flex-wrap: wrap; /* Permite que os links quebrem linha se houver muitos */
-        gap: var(--spacing-sm); /* Ajusta o espaçamento entre os links */
+        gap: 1.5rem; /* Ajusta o espaçamento entre os links em tablets */
+        padding: 0 1rem; /* Adiciona um pouco de padding lateral para não colar nas bordas */
     }
 
     .mainNav ul {
-        gap: var(--spacing-sm); /* Garante que o gap interno da lista também seja ajustado */
+        gap: 1.5rem; /* Garante que o gap interno da lista também seja ajustado */
     }
 
     .mainNav a {
-        font-size: 0.9rem; /* Fonte levemente menor para caber melhor */
-        padding: var(--spacing-xs) var(--spacing-md); /* Ajusta padding nos botões */
-    }
-    .logo {
-        font-size: 2rem;
-        margin-right: 0; /* Remove margin-right auto em telas menores se centralizado */
-        width: 100%; /* Ocupa a largura total para forçar a centralização */
-        text-align: center;
-        margin-bottom: var(--spacing-sm); /* Espaçamento abaixo do logo centralizado */
+        font-size: 1rem; /* Fonte levemente menor para caber melhor */
+        padding: 5px 10px; /* Adicionei padding nos links para aumentar a área clicável */
     }
 }
 
 /* Mobile Portrait (retrato) */
 @media (max-width: 480px) {
     .mainHeader {
-        padding: 0.8rem 0;
-    }
-
-    .container {
-        padding: 0 var(--spacing-xs); /* Ajusta o padding lateral */
+        padding: 0.8rem 0; /* Mais compacto para celulares pequenos */
     }
 
     .headerContainer {
-        gap: var(--spacing-xs); /* Reduz ainda mais o espaçamento entre os links */
+        gap: 0.8rem; /* Reduz ainda mais o espaçamento entre os links */
+        padding: 0 0.8rem; /* Ajusta o padding lateral */
     }
 
     .mainNav ul {
-        gap: var(--spacing-xs);
+        gap: 0.8rem; /* Reduz o gap interno da lista */
     }
 
     .mainNav a {
-        font-size: 0.8rem;
-        padding: var(--spacing-xxs) var(--spacing-sm); /* Ajuste o padding para a área clicável */
-    }
-    .logo {
-        font-size: 1.8rem;
-        margin-bottom: var(--spacing-xs);
+        font-size: 0.9rem; /* Fonte menor para caber melhor */
+        padding: 3px 8px; /* Ajuste o padding para a área clicável */
     }
 }
