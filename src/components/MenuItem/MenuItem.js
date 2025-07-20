@@ -1,3 +1,4 @@
+// src/components/MenuItem/MenuItem.jsx
 import React from 'react';
 import styles from './MenuItem.module.css';
 
@@ -6,21 +7,17 @@ function MenuItem({ item }) {
     return <div className={styles.errorContainer}>Erro: Dados do item do cardápio estão faltando.</div>;
   }
 
-  // A imageUrl agora será a URL já resolvida pelo Webpack,
-  // vinda diretamente do MenuSection.
-  const { name, description, price, imageUrl } = item; 
+  const { name, description, priceP, priceG, price, imageUrl } = item; 
 
   const itemName = name || 'Item Desconhecido';
   const itemDescription = description || 'Sem descrição disponível.';
-  // Definimos um placeholder mais robusto para ser usado se imageUrl for vazia ou inválida.
-  // Certifique-se de ter um arquivo 'placeholder-pizza.jpg' em 'public/assets'
   const finalImageUrl = imageUrl || '/assets/placeholder-pizza.jpg'; 
 
   return (
     <div className={styles.menuItem}>
       <div className={styles.itemImageContainer}>
         <img
-          src={finalImageUrl} // Usa a URL já resolvida
+          src={finalImageUrl}
           alt={itemName}
           className={styles.itemImage}
           loading="lazy"
@@ -29,11 +26,22 @@ function MenuItem({ item }) {
       <div className={styles.itemContent}>
         <div className={styles.itemHeader}>
           <h3 className={styles.itemName}>{itemName}</h3>
-          <p className={styles.itemPrice}>{price}</p>
         </div>
         {itemDescription && (
           <p className={styles.itemDescription}>{itemDescription}</p>
         )}
+        {/* AGORA: O bloco de preços vem DEPOIS da descrição */}
+        <div className={styles.itemPrices}>
+          {priceP && priceG && (
+            <>
+              <p className={styles.priceOption}>P: {priceP}</p>
+              <p className={styles.priceOption}>G: {priceG}</p>
+            </>
+          )}
+          {price && !priceP && !priceG && (
+            <p className={styles.priceOption}>{price}</p>
+          )}
+        </div>
       </div>
     </div>
   );

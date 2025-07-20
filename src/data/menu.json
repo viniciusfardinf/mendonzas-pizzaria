@@ -6,77 +6,88 @@
         "id": "pizza-frango-cremoso",
         "name": "Frango Cremoso",
         "description": "Molho, frango, mussarela, catupiry, orégano e alho.",
-        "price": "R$65,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/frango_cremoso.jpg"
       },
       {
         "id": "pizza-calabresa",
         "name": "Calabresa",
         "description": "Molho, mussarela, calabresa, cebola roxa, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/calabresa.jpg"
       },
       {
         "id": "pizza-bacon",
         "name": "Bacon",
         "description": "Molho, mussarela, bacon, cebola roxa, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/bacon.jpg"
       },
       {
         "id": "pizza-portuguesa",
         "name": "Portuguesa",
         "description": "Molho, mussarela, presunto, bacon, pimentão, tomate, milho, ervilha, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/portuguesa.jpg"
       },
       {
         "id": "pizza-abacaxi",
         "name": "Abacaxi",
         "description": "Molho, mussarela, bacon e abacaxi caramelizado.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/abacaxi.jpg"
       },
       {
         "id": "pizza-camarao",
         "name": "Camarão",
         "description": "Molho especial, mussarela, camarão, catupiry, orégano e alho.",
-        "price": "R$80,00",
+        "priceP": "R$40,00",
+        "priceG": "R$80,00",
         "imageUrl": "/assets/pizzas/camarao.jpg"
       },
       {
         "id": "pizza-alho-poro",
         "name": "Alho Poró",
         "description": "Molho, mussarela, alho poró, bacon, cebola roxa, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/alho_poro.jpg"
       },
       {
         "id": "pizza-franguesa",
         "name": "Franguesa",
         "description": "Molho, mussarela, frango, bacon, calabresa, catupiry, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/franguesa.jpg"
       },
       {
         "id": "pizza-3-queijos",
         "name": "3 Queijos",
         "description": "Molho, mussarela, provolone, catupiry, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/3_queijos.jpg"
       },
       {
         "id": "pizza-vegetariana",
         "name": "Vegetariana",
         "description": "Molho, mussarela, alho poró, milho, ervilha, tomate, cebola, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/vegetariana.jpg"
       },
       {
         "id": "pizza-bacon-cheddar",
         "name": "Bacon com Cheddar",
         "description": "Molho, frango, bacon, cheddar, orégano e alho.",
-        "price": "R$70,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas/bacon_cheddar.jpg"
       },
       {
@@ -95,42 +106,48 @@
         "id": "pizza-nutella",
         "name": "Nutella",
         "description": "1 Acompanhamento: Morango, Banana ou Disquete.",
-        "price": "R$35,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas_doces/nutella.jpg"
       },
       {
         "id": "pizza-doce-leite",
         "name": "Doce de Leite",
         "description": "1 Acompanhamento: Banana ou Disquete.",
-        "price": "R$35,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas_doces/doce_leite.jpg"
       },
       {
         "id": "pizza-banana-canela",
         "name": "Banana c/ Canela",
         "description": "Mussarela, leite condensado, banana, e canela.",
-        "price": "R$35,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas_doces/banana_canela.jpg"
       },
       {
         "id": "pizza-mendonza",
-        "name": "Mendonza’s",
+        "name": "Mendonza's",
         "description": "Mussarela, pera, gorgonzola e mel.",
-        "price": "R$40,00",
+        "priceP": "R$40,00",
+        "priceG": "R$80,00",
         "imageUrl": "/assets/pizzas_doces/mendonza.jpg"
       },
       {
         "id": "pizza-dois-amores",
         "name": "Dois Amores",
         "description": "Chocolate preto, chocolate branco.",
-        "price": "R$35,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas_doces/dois_amores.jpg"
       },
       {
         "id": "pizza-romeu-julieta",
         "name": "Romeu e Julieta",
         "description": "Mussarela, goiaba.",
-        "price": "R$35,00",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
         "imageUrl": "/assets/pizzas_doces/romeu_julieta.jpg"
       }
     ]
