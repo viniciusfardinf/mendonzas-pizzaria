@@ -1,0 +1,112 @@
+/* src/GlobalStyles.css */
+
+/* Definição de Variáveis CSS */
+:root {
+--color-primary: #DC3545;
+  --color-secondary: #FFC107;
+  --color-text-dark: #343A40;
+  --color-text-light: #F8F9FA; 
+  --color-card-background: #FFFFFF;
+  --color-background-body: #F0F2F5; 
+  --background-dark: #1A1A1A;
+
+  /* Versões RGB para uso com rgba() */
+  --color-primary-rgb: 220, 53, 69;
+  --color-secondary-rgb: 255, 193, 7;
+  --color-text-dark-rgb: 52, 58, 64;
+  --color-text-light-rgb: 248, 249, 250;
+
+  /* Espaçamentos */
+  --spacing-xxs: 2px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 80px; /* Para seções maiores */
+  --spacing-xxxl: 120px;
+
+  /* Bordas e Sombras */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-pill: 9999px; /* Para botões arredondados */
+
+  /* Transições */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2);
+
+  /* Transições */
+  --transition-speed-fast: 0.15s;
+  --transition-speed-normal: 0.3s;
+  --transition-speed-slow: 0.5s;
+
+  /* Fontes */
+  --font-family-heading: 'Playfair Display', serif;
+  --font-family-body: 'Roboto', sans-serif;
+
+  /* Larguras máximas */
+  --container-max-width: 1200px;
+}
+
+/* Reset Básico para Consistência */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px; /* Base para rem */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-background-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  color: var(--color-text-dark); /* Títulos escuros por padrão */
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
+}
+
+p {
+  margin-bottom: var(--spacing-sm);
+}
+
+a { /* Esta regra 'a' é a que pode estar causando o problema de sobreposição se não for específica o suficiente */
+  color: var(--color-primary); /* Se esta cor for muito escura, em fundos escuros será invisível */
+  text-decoration: none;
+  transition: color var(--transition-speed-fast) ease-in-out;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
+/* Classes globais para títulos de seção, se usados */
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-primary);
+}

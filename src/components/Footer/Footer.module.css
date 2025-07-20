@@ -1,0 +1,158 @@
+/* src/components/Footer/Footer.module.css */
+
+/* Estilos Globais do Rodapé */
+.footer {
+  background: #000000; /* Fundo preto absoluto */
+  color: #F8F9FA; /* Cor branca para o texto principal do rodapé */
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+  text-align: left;
+}
+
+/* Contêiner principal das colunas do rodapé */
+.footerContainer {
+  display: grid;
+  /* Adjusting minmax to allow columns to shrink slightly more evenly if needed */
+  /* Using a larger gap to push columns further apart and balance space */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted min-width for better distribution */
+  gap: var(--spacing-xl); /* Increased gap for more equal visual distribution */
+  padding: 0 var(--spacing-md) var(--spacing-lg); /* Padding added to container itself */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: var(--container-max-width); /* Ensure it respects max width from GlobalStyles */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Estilos para os títulos das seções do rodapé */
+.socialMediaColumn h4,
+.hoursColumn h4,
+.mapColumn h4 {
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  color: var(--color-secondary); /* Cor dourada para os títulos */
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Estilos para o bloco de Redes Sociais */
+.socialMediaColumn {
+    text-align: center;
+}
+
+.contactText {
+    font-size: 0.95rem;
+    color: rgba(248, 249, 250, 0.8);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Contêiner dos ícones sociais no rodapé */
+.socialIconsFooter {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-top: 0;
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+/* Estilos para os ícones do React Icons */
+.socialIconsFooter a .iconFooter {
+  width: 30px;
+  height: 30px;
+  color: #F8F9FA;
+  transition: transform var(--transition-speed-normal);
+}
+
+.socialIconsFooter a .iconFooter:hover {
+  transform: scale(1.1);
+  color: var(--color-primary);
+}
+
+/* Estilos para o bloco Horário de Funcionamento */
+.hoursColumn p {
+    font-size: 0.95rem;
+    color: rgba(248, 249, 250, 0.8);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.addressText {
+    font-size: 0.95rem;
+    color: rgba(248, 249, 250, 0.8);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Estilos para o container do mapa */
+.mapColumn {
+    text-align: center;
+}
+
+.mapColumn iframe {
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  height: 150px;
+  display: block;
+  margin-top: var(--spacing-sm);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+}
+
+/* Direitos Autorais */
+.copyright {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  font-size: 0.85rem;
+  color: rgba(248, 249, 250, 0.6);
+}
+
+/* Media Queries para Responsividade do Rodapé */
+@media (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted min-width for larger tablets */
+    gap: var(--spacing-lg); /* Slightly smaller gap */
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    grid-template-columns: 1fr; /* Columns stack on mobile */
+    text-align: center;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md) var(--spacing-lg); /* Adjust padding */
+  }
+
+  .socialMediaColumn,
+  .hoursColumn,
+  .mapColumn {
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  .hoursColumn p,
+  .addressText {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
+  }
+
+  .mapColumn iframe {
+      height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+    .socialMediaColumn h4,
+    .hoursColumn h4,
+    .mapColumn h4 {
+        font-size: 1.4rem;
+    }
+    .hoursColumn p,
+    .addressText {
+        font-size: 0.9rem;
+    }
+    .mapColumn iframe {
+        height: 100px;
+    }
+    .footerContainer {
+      padding: 0 var(--spacing-sm) var(--spacing-md); /* Adjust padding */
+    }
+}

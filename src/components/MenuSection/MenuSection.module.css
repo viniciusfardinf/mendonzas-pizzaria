@@ -1,0 +1,228 @@
+/*
+  Variáveis globais assumidas de GlobalStyles.css:
+  --color-primary (ex: #DC3545 para um vermelho vibrante),
+  --color-secondary (ex: #FFC107 para um dourado),
+  --color-text-dark (ex: #343A40 para texto escuro),
+  --color-text-light (ex: #F8F9FA para texto claro),
+  --color-card-background (ex: #FFFFFF para o fundo do card),
+  --border-radius-md (ex: 8px), --shadow-md, --shadow-lg,
+  --transition-speed-normal (ex: 0.3s),
+  --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl, --spacing-xxl,
+  --font-family-heading (ex: 'Playfair Display', serif),
+  --font-family-body (ex: 'Roboto', sans-serif),
+  --container-max-width (ex: 1200px),
+  --color-primary-rgb (RGB de --color-primary, ex: 220, 53, 69)
+*/
+
+.menuSection {
+  padding: var(--spacing-xxl) 0; /* Padding vertical, padding horizontal via .menuItemsGrid */
+  background-color: transparent; /* SEM IMAGEM DE FUNDO E SEM COR DE FUNDO */
+  color: var(--color-text-dark); /* Cor do texto para o fundo claro */
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Sem pseudo-elemento ::before, pois não há imagem de fundo */
+
+.menuSection > * {
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo fique visível */
+}
+
+.section-title {
+  font-family: var(--font-family-heading);
+  font-size: 3.5rem;
+  color: var(--color-primary); /* Cor de destaque para o título principal */
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  /* Sem text-shadow, pois o fundo agora é claro */
+}
+
+/* Estilos para os Botões de Categoria */
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg); /* Espaçamento MAIOR entre os botões */
+  margin-bottom: var(--spacing-xl);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--spacing-md);
+}
+
+.categoryButton {
+  background-color: var(--color-primary); /* Fundo VERMELHO */
+  color: var(--color-text-light); /* Fonte BRANCA */
+  border: 2px solid var(--color-primary); /* Borda VERMELHA */
+  border-radius: 9999px; /* Borda bem ARREDONDADA (pílula) */
+  padding: var(--spacing-sm) var(--spacing-lg); /* Padding ajustado para o formato arredondado */
+  font-family: var(--font-family-body); /* Fonte do corpo, para ser mais legível */
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all var(--transition-speed-normal) ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-sm); /* Sombra sutil para dar profundidade */
+}
+
+.categoryButton:hover {
+  background-color: var(--color-secondary); /* Fundo DOURADO no hover */
+  color: var(--color-text-dark); /* Texto ESCURO no hover para contraste */
+  border-color: var(--color-secondary); /* Borda DOURADA no hover */
+  transform: translateY(-3px); /* Efeito de "levantar" um pouco mais */
+  box-shadow: var(--shadow-md); /* Sombra mais pronunciada no hover */
+}
+
+.categoryButton.active {
+  background-color: var(--color-secondary); /* Fundo DOURADO quando ativo */
+  color: var(--color-text-dark); /* Texto ESCURO quando ativo */
+  border-color: var(--color-secondary); /* Borda DOURADA quando ativo */
+  box-shadow: var(--shadow-md);
+  pointer-events: none; /* Impede clique se já estiver ativo */
+}
+
+/* Estilos para as Seções de Categoria Individuais */
+.menuCategory {
+  margin-bottom: 5rem; /* Espaçamento entre as categorias */
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  border-radius: var(--border-radius-md);
+}
+
+.categoryTitle {
+  font-family: var(--font-family-heading);
+  font-size: 2.8rem;
+  color: var(--color-text-dark); /* Título da categoria na cor escura para fundo claro */
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.categoryTitle::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background-color: var(--color-primary); /* Linha na cor primária (vermelha) */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  border-radius: var(--border-radius-sm);
+}
+
+/* GRID de ITENS com espaçamento entre cards e padding nas bordas */
+.menuItemsGrid {
+  display: grid;
+  /* Ajuste para 3-4 colunas em telas maiores, cards menores */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Min-width para cards menores, mais por linha */
+  gap: var(--spacing-xl); /* Espaçamento MAIOR entre os cards (pizzas) */
+  padding: var(--spacing-xl); /* Padding ao redor do grid para afastamento das bordas da página */
+  justify-content: center;
+}
+
+/* Estilos para as mensagens de erro/sem itens */
+.errorMessage, .noItemsMessage {
+  color: var(--color-text-dark);
+  background-color: #ffe0e0;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  font-weight: bold;
+  margin: var(--spacing-md) auto;
+  max-width: 600px;
+  border: 1px solid var(--color-primary);
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1024px) {
+  .menuSection {
+    padding: var(--spacing-xxl) 0;
+  }
+  .categoryButtons {
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+  }
+  .categoryButton {
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  .menuCategory {
+    margin-bottom: 4rem;
+  }
+  .categoryTitle {
+    font-size: 2.5rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .menuSection {
+    padding: var(--spacing-lg) 0;
+  }
+  .section-title {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+  }
+  .categoryButtons {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-sm);
+  }
+  .categoryButton {
+    font-size: 0.95rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  .menuCategory {
+    margin-bottom: 3rem;
+  }
+  .categoryTitle {
+    font-size: 2.2rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .menuSection {
+    padding: var(--spacing-md) 0;
+  }
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+  .categoryButtons {
+    flex-direction: column; /* Empilha em telas pequenas */
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+    padding: 0 var(--spacing-xs);
+  }
+  .categoryButton {
+    font-size: 0.95rem;
+    width: 100%; /* Ocupa largura total */
+    padding: var(--spacing-sm);
+  }
+  .menuCategory {
+    margin-bottom: 2rem;
+  }
+  .categoryTitle {
+    font-size: 1.8rem;
+  }
+  .menuItemsGrid {
+    grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+}

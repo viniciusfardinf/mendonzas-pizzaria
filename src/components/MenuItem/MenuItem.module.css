@@ -1,0 +1,196 @@
+/* src/components/MenuItem/MenuItem.module.css */
+
+/*
+  Variáveis globais assumidas de GlobalStyles.css:
+  --color-primary, --color-secondary, --color-text-dark, --color-card-background,
+  --border-radius-md, --shadow-md, --shadow-lg, --shadow-sm,
+  --transition-speed-normal,
+  --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl,
+  --font-family-heading, --font-family-body
+*/
+
+.menuItem {
+  background-color: var(--color-card-background); /* Fundo branco/claro para o card */
+  border-radius: var(--border-radius-md); /* Bordas arredondadas */
+  box-shadow: var(--shadow-md); /* Sombra suave para profundidade */
+  display: flex;
+  flex-direction: column; /* Imagem em cima, conteúdo em baixo */
+  overflow: hidden; /* Garante que a imagem e bordas arredondadas funcionem bem */
+  transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.menuItem:hover {
+  transform: translateY(-8px); /* Efeito de "levantar" um pouco mais ao passar o mouse */
+  box-shadow: var(--shadow-lg); /* Sombra mais intensa no hover */
+}
+
+.menuItem:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.itemImageContainer {
+  width: 100%;
+  height: 200px; /* AUMENTADO A ALTURA DA IMAGEM para dar mais espaço ao card */
+  overflow: hidden;
+  position: relative;
+}
+
+.itemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantido 'cover' */
+  display: block;
+  transition: transform var(--transition-speed-normal) ease-in-out;
+  background-color: #f8f9fa; /* Fundo claro para imagens com transparência */
+}
+
+/* Para imagens de bebidas que precisam manter a proporção e caber completamente */
+/* Você pode adicionar uma classe no MenuItem.js para itens de bebidas
+   e aplicar object-fit: contain; apenas para eles. Ex:
+   .itemImage.isBeverage { object-fit: contain; }
+   Por enquanto, mantemos 'cover' como padrão, que funciona para a maioria das pizzas.
+*/
+
+
+.menuItem:hover .itemImage {
+  transform: scale(1.05); /* Zoom menor para ser mais sutil */
+}
+
+.itemTags {
+  display: none; /* Esconde as tags */
+}
+
+.itemContent {
+  padding: var(--spacing-md); /* Mantém o padding interno */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between; /* Espalha o conteúdo verticalmente */
+}
+
+.itemHeader {
+  display: flex;
+  flex-direction: column; /* ALTERADO: Itens empilhados (nome e preço) */
+  align-items: flex-start; /* Alinha o nome e preço à esquerda */
+  margin-bottom: var(--spacing-sm);
+}
+
+.itemHeader .itemName {
+  font-family: var(--font-family-heading);
+  font-size: 1.4rem;
+  color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.2;
+  width: 100%; /* Permite que o nome ocupe toda a largura */
+}
+
+.itemHeader .itemPrice {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+  margin: var(--spacing-xs) 0 0 0; /* Adiciona margem superior para separar do nome */
+  width: 100%; /* Permite que o preço ocupe toda a largura */
+  text-align: left; /* Alinha o preço à esquerda, como o nome */
+  white-space: normal; /* ALTERADO: Permite quebra de linha para preços longos */
+  word-break: break-word; /* Garante que palavras muito longas também quebrem */
+}
+
+.itemDescription {
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* ... (código anterior) ... */
+
+/* Media Queries para Responsividade do MenuItem */
+@media (max-width: 1024px) {
+  /* ... (código anterior) ... */
+  .itemHeader .itemName { font-size: 1.3rem; }
+  .itemHeader .itemPrice { font-size: 1.3rem; }
+}
+
+@media (max-width: 768px) {
+  /* ... (código anterior) ... */
+  .itemHeader .itemName { font-size: 1.2rem; }
+  .itemHeader .itemPrice { font-size: 1.2rem; }
+}
+
+/* Estilo para a mensagem de erro */
+.errorContainer {
+  padding: var(--spacing-md);
+  color: var(--color-primary);
+  background-color: #ffe0e0;
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  font-weight: bold;
+  margin: 1rem auto;
+  max-width: 300px;
+}
+
+/* Media Queries para Responsividade do MenuItem */
+@media (max-width: 1024px) {
+  .itemImageContainer {
+    height: 180px; /* Ajuste para telas médias */
+  }
+  .itemHeader .itemName {
+    font-size: 1.3rem;
+  }
+  .itemHeader .itemPrice {
+    font-size: 1.3rem;
+  }
+  .itemDescription {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 3; /* Ajusta o limite de linhas se necessário */
+  }
+}
+
+@media (max-width: 768px) {
+  .itemImageContainer {
+    height: 160px; /* Ajuste para telas de tablet */
+  }
+  .itemContent {
+    padding: var(--spacing-sm);
+  }
+  .itemHeader .itemName {
+    font-size: 1.2rem;
+  }
+  .itemHeader .itemPrice {
+    font-size: 1.2rem;
+  }
+  .itemDescription {
+    font-size: 0.75rem;
+    -webkit-line-clamp: 3; 
+  }
+}
+
+@media (max-width: 480px) {
+  .itemImageContainer {
+    height: 130px; /* Ajuste para celulares */
+  }
+  .itemContent {
+    padding: var(--spacing-xs);
+  }
+  .itemHeader .itemName {
+    font-size: 1rem;
+  }
+  .itemHeader .itemPrice {
+    font-size: 1rem;
+  }
+  .itemDescription {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 2; 
+  }
+}

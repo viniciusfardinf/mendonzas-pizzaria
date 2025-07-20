@@ -1,0 +1,200 @@
+/* src/components/HeroSection/HeroSection.module.css */
+
+/*
+  Variáveis globais assumidas de GlobalStyles.css:
+  --color-primary, --color-secondary, --color-text-dark, --color-text-light,
+  --border-radius-md, --border-radius-pill, --shadow-sm, --shadow-md,
+  --transition-speed-normal, --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg,
+  --font-family-heading, --font-family-body, --container-max-width,
+  --color-primary-rgb (para uso com rgba)
+*/
+
+.hero {
+    background-color: #000;
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.heroImageLeft,
+.heroImageRight {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.heroImageLeft {
+    left: 0;
+}
+
+.heroImageRight {
+    right: 0;
+}
+
+.heroBackgroundMobile {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.heroContent {
+    max-width: 700px;
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: var(--spacing-lg);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroContent h1 {
+    font-family: var(--font-family-heading);
+    font-size: 3.8rem;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.1;
+    color: var(--color-secondary);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.heroContent p {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-xl);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    line-height: 1.5;
+}
+
+/* ESTILO PARA O BOTÃO "VER CARDÁPIO" - AGORA COM CLASSE MODULAR */
+.heroButton { /* Classe renomeada de .btn-primary para styles.heroButton */
+  display: inline-block;
+  background-color: var(--color-primary); /* Fundo vermelho */
+  color: var(--color-text-light); /* Fonte branca */
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-pill);
+  text-decoration: none; /* Remove sublinhado */
+  font-family: var(--font-family-body);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-speed-normal) ease;
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+}
+
+.heroButton:hover {
+  background-color: var(--color-secondary); /* Fundo dourado no hover */
+  color: var(--color-text-dark); /* Texto escuro no hover */
+  border-color: var(--color-secondary); /* Borda dourada no hover */
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+
+/* Media Queries para Hero Section */
+@media (max-width: 1024px) {
+    .heroImageLeft,
+    .heroImageRight {
+        width: 50%;
+    }
+
+    .heroContent {
+        max-width: 600px;
+        padding: var(--spacing-md);
+    }
+    .heroContent h1 {
+        font-size: 3rem;
+    }
+    .heroContent p {
+        font-size: 1.2rem;
+    }
+    .heroButton { /* Ajustar aqui também */
+      font-size: 1.1rem;
+      padding: var(--spacing-sm) var(--spacing-lg);
+    }
+}
+
+/* ---------------------------------------------------------------------- */
+/* LAYOUT PARA CELULARES (max-width: 768px e 480px) */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .heroImageLeft,
+    .heroImageRight {
+        display: none;
+    }
+
+    .heroBackgroundMobile {
+        display: block;
+    }
+
+    .heroContent {
+        max-width: 90%;
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 6rem var(--spacing-md) 2rem;
+        z-index: 2;
+    }
+
+    .heroContent h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+
+    .heroContent p {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+    .heroButton { /* Ajustar aqui também */
+      font-size: 1rem;
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .heroContent h1 {
+        font-size: 2rem;
+    }
+
+    .heroContent p {
+        font-size: 1rem;
+    }
+    
+    .heroContent {
+        padding: 5rem var(--spacing-sm) 1.5rem;
+    }
+    .heroButton { /* Ajustar aqui também */
+      font-size: 0.9rem;
+      padding: var(--spacing-xs) var(--spacing-md);
+    }
+}
