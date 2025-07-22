@@ -3,6 +3,38 @@
     "category": "PIZZAS SALGADAS",
     "items": [
       {
+        "id": "pizza-presunto-queijo",
+        "name": "Presunto e Queijo",
+        "description": "Molho, mussarela, presunto, orégano e alho.",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
+        "imageUrl": "/assets/pizzas/presunto_queijo.jpg"
+      },
+      {
+        "id": "pizza-marguerita",
+        "name": "Marguerita",
+        "description": "Molho, mussarela, tomate, manjericão, orégano e alho.",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
+        "imageUrl": "/assets/pizzas/marguerita.jpg"
+      },
+      {
+        "id": "pizza-palmito",
+        "name": "Palmito",
+        "description": "Molho, mussarela, palmito, orégano e alho.",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
+        "imageUrl": "/assets/pizzas/palmito.jpg"
+      },
+      {
+        "id": "pizza-pepperoni",
+        "name": "Pepperoni",
+        "description": "Molho, mussarela, pepperoni, orégano e alho.",
+        "priceP": "R$35,00",
+        "priceG": "R$70,00",
+        "imageUrl": "/assets/pizzas/pepperoni.jpg"
+      },
+      {
         "id": "pizza-frango-cremoso",
         "name": "Frango Cremoso",
         "description": "Molho, frango, mussarela, catupiry, orégano e alho.",
