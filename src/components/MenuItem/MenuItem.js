@@ -11,7 +11,22 @@ function MenuItem({ item }) {
 
   const itemName = name || 'Item Desconhecido';
   const itemDescription = description || 'Sem descrição disponível.';
+  // Se imageUrl for vazio ou undefined, usa um placeholder local
   const finalImageUrl = imageUrl || '/assets/placeholder-pizza.jpg'; 
+
+  // Função para formatar o preço com "R$" se necessário
+  const formatPrice = (p) => {
+    if (!p) return '';
+    // Verifica se já começa com "R$" ou "R$ "
+    if (String(p).trim().startsWith('R$')) {
+      return String(p).trim();
+    }
+    // Para casos como o do suco, onde o "R$" pode estar no meio
+    if (itemName === "Suco" && String(p).includes("R$")) {
+        return String(p).trim(); // Mantém como está para o suco se já contiver R$
+    }
+    return `R$ ${String(p).trim()}`; // Adiciona "R$" e um espaço
+  };
 
   return (
     <div className={styles.menuItem}>
@@ -30,16 +45,19 @@ function MenuItem({ item }) {
         {itemDescription && (
           <p className={styles.itemDescription}>{itemDescription}</p>
         )}
-        {/* AGORA: O bloco de preços vem DEPOIS da descrição */}
         <div className={styles.itemPrices}>
-          {priceP && priceG && (
+          {priceP && priceG ? (
+            // Se tiver priceP e priceG, mostra ambos
             <>
-              <p className={styles.priceOption}>P: {priceP}</p>
-              <p className={styles.priceOption}>G: {priceG}</p>
+              <p className={styles.priceOption}>P: {formatPrice(priceP)}</p>
+              <p className={styles.priceOption}>G: {formatPrice(priceG)}</p>
             </>
-          )}
-          {price && !priceP && !priceG && (
-            <p className={styles.priceOption}>{price}</p>
+          ) : price ? (
+            // Se tiver apenas price, mostra ele
+            <p className={styles.priceOption}>{formatPrice(price)}</p>
+          ) : (
+            // Caso não tenha nenhum preço (opcional, pode ser uma mensagem ou vazio)
+            <p className={styles.priceOption}>Preço sob consulta</p>
           )}
         </div>
       </div>

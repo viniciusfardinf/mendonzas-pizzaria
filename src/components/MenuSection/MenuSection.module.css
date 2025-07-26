@@ -1,94 +1,100 @@
-/* src/components/MenuSection/MenuSection.module.css */
-
 /*
-  Variáveis globais assumidas de GlobalStyles.css:
-  --color-primary, --color-secondary, --color-text-dark, --color-text-light,
-  --border-radius-md, --border-radius-pill, --shadow-sm, --shadow-md,
-  --transition-speed-normal, --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg,
-  --font-family-heading, --font-family-body, --container-max-width,
-  --color-primary-rgb (para uso com rgba)
-*/
+ * Arquivo CSS para o componente MenuSection
+ *
+ * Variáveis globais assumidas de GlobalStyles.css:
+ * --color-primary, --color-secondary, --color-text-dark, --color-text-light,
+ * --border-radius-md, --border-radius-pill, --shadow-sm, --shadow-md, --shadow-lg,
+ * --transition-speed-normal,
+ * --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl, --spacing-xxl,
+ * --font-family-heading, --font-family-body, --container-max-width,
+ * --color-primary-rgb (para uso com rgba, se necessário)
+ */
 
 .menuSection {
-  padding: var(--spacing-xxl) 0;
-  background-color: transparent;
-  color: var(--color-text-dark);
-  position: relative;
-  overflow: hidden;
-  text-align: center;
+  padding: var(--spacing-xxl) 0; /* Padding vertical generoso */
+  background-color: transparent; /* Fundo transparente, pode ser mudado */
+  color: var(--color-text-dark); /* Cor padrão do texto */
+  position: relative; /* Para posicionar elementos filhos */
+  overflow: hidden; /* Garante que nada transborde */
+  text-align: center; /* Centraliza o conteúdo dentro da seção */
 }
 
-/* Removido .section-title */
-
+/* Garante que o conteúdo da seção fique acima de quaisquer elementos de fundo */
 .menuSection > * {
   position: relative;
   z-index: 1;
 }
 
-/* Estilos para os Botões de Categoria */
+/* Estilos para o contêiner dos botões de categoria */
 .categoryButtons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-  max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 var(--spacing-md);
+  flex-wrap: wrap; /* Permite que os botões quebrem linha */
+  justify-content: center; /* Centraliza os botões */
+  gap: var(--spacing-lg); /* Espaçamento entre os botões */
+  margin-bottom: var(--spacing-xl); /* Espaço abaixo dos botões */
+  max-width: var(--container-max-width); /* Limita a largura do contêiner */
+  margin-left: auto; /* Centraliza o contêiner */
+  margin-right: auto; /* Centraliza o contêiner */
+  padding: 0 var(--spacing-md); /* Padding horizontal para evitar que os botões colem nas bordas da tela */
 }
 
+/* Estilos individuais para os botões de categoria */
 .categoryButton {
   background-color: var(--color-primary);
   color: var(--color-text-light);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius-pill);
+  border: 2px solid var(--color-primary); /* Borda com a cor primária */
+  border-radius: var(--border-radius-pill); /* Bordas arredondadas (formato pílula) */
   padding: var(--spacing-sm) var(--spacing-lg);
   font-family: var(--font-family-body);
   font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all var(--transition-speed-normal) ease;
-  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed-normal) ease; /* Transição suave para hover/active */
+  box-shadow: var(--shadow-sm); /* Sombra sutil */
+  cursor: pointer; /* Indica que é clicável */
+  white-space: nowrap; /* Impede que o texto do botão quebre linha */
 }
 
 .categoryButton:hover {
   background-color: var(--color-secondary);
   color: var(--color-text-dark);
   border-color: var(--color-secondary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px); /* Efeito de elevação ao passar o mouse */
+  box-shadow: var(--shadow-md); /* Sombra um pouco mais forte */
 }
 
+/* Estilo para o botão de categoria ativo (selecionado) */
 .categoryButton.active {
   background-color: var(--color-secondary);
   color: var(--color-text-dark);
   border-color: var(--color-secondary);
   box-shadow: var(--shadow-md);
-  pointer-events: none;
+  pointer-events: none; /* Desabilita cliques adicionais no botão ativo */
 }
 
-/* Estilos para as Seções de Categoria Individuais (sem fundo) */
+/* Estilos para as seções de categoria individuais (que contêm os itens do menu) */
 .menuCategory {
-  margin-bottom: 5rem;
-  max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0;
-  border-radius: var(--border-radius-md);
+  margin-bottom: 5rem; /* Espaço abaixo de cada categoria */
+  max-width: var(--container-max-width); /* Limita a largura da seção */
+  margin-left: auto; /* Centraliza a seção */
+  margin-right: auto; /* Centraliza a seção */
+  padding: 0; /* Remove padding padrão, o grid tem padding */
+  border-radius: var(--border-radius-md); /* Bordas arredondadas */
 }
 
+/* Estilo para o título de cada categoria (ex: "PIZZAS SALGADAS") */
 .categoryTitle {
   font-family: var(--font-family-heading);
   font-size: 2.8rem;
   color: var(--color-text-dark);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg); /* Espaço abaixo do título */
   text-align: center;
-  position: relative;
-  padding-bottom: var(--spacing-sm);
+  position: relative; /* Para posicionar o ::after */
+  padding-bottom: var(--spacing-sm); /* Espaço para a linha decorativa */
 }
 
+/* Linha decorativa abaixo do título da categoria */
 .categoryTitle::after {
   content: '';
   position: absolute;
@@ -96,37 +102,39 @@
   height: 4px;
   background-color: var(--color-primary);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Centraliza a linha */
   bottom: 0;
   border-radius: var(--border-radius-sm);
 }
 
-/* GRID de ITENS com espaçamento entre cards e padding nas bordas */
+/* GRID de ITENS do Menu (cards individuais) */
 .menuItemsGrid {
   display: grid;
+  /* Colunas responsivas: auto-fit para preencher o espaço, minmax para controle de tamanho */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--spacing-xl);
-  padding: var(--spacing-xl);
-  justify-content: center;
+  gap: var(--spacing-xl); /* Espaçamento entre os cards */
+  padding: var(--spacing-xl); /* Padding interno do grid para não colar nas bordas */
+  justify-content: center; /* Centraliza os itens no grid */
 }
 
 /* Estilos para as mensagens de erro/sem itens */
 .errorMessage, .noItemsMessage {
   color: var(--color-text-dark);
-  background-color: #ffe0e0;
+  background-color: #ffe0e0; /* Fundo claro com tom avermelhado para erro */
   padding: var(--spacing-md);
   border-radius: var(--border-radius-md);
   text-align: center;
   font-weight: bold;
-  margin: var(--spacing-md) auto;
+  margin: var(--spacing-md) auto; /* Centraliza a mensagem */
   max-width: 600px;
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-primary); /* Borda para destaque */
 }
 
-/* Media Queries para Responsividade */
+/* -------------------- Media Queries para Responsividade -------------------- */
+
 @media (max-width: 1024px) {
   .menuSection {
-    padding: var(--spacing-xxl) 0;
+    padding: var(--spacing-xxl) 0; /* Mantido o padding, ajuste conforme necessário */
   }
   .categoryButtons {
     gap: var(--spacing-md);
@@ -180,14 +188,14 @@
     padding: var(--spacing-md) 0;
   }
   .categoryButtons {
-    flex-direction: column;
+    flex-direction: column; /* Botões de categoria empilhados em telas muito pequenas */
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-md);
     padding: 0 var(--spacing-xs);
   }
   .categoryButton {
     font-size: 0.95rem;
-    width: 100%;
+    width: 100%; /* Botões de categoria ocupam a largura total */
     padding: var(--spacing-sm);
   }
   .menuCategory {
@@ -197,7 +205,7 @@
     font-size: 1.8rem;
   }
   .menuItemsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Apenas uma coluna em telas muito pequenas */
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
   }

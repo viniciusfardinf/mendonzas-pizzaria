@@ -1,13 +1,7 @@
-/* src/components/MenuItem/MenuItem.module.css */
-
 /*
-  Variáveis globais assumidas de GlobalStyles.css:
-  --color-primary, --color-secondary, --color-text-dark, --color-card-background,
-  --border-radius-md, --shadow-md, --shadow-lg, --shadow-sm,
-  --transition-speed-normal,
-  --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl,
-  --font-family-heading, --font-family-body
-*/
+ * Arquivo CSS para o componente MenuItem
+ * Variáveis globais (ex: --color-primary) devem ser definidas em um arquivo GlobalStyles.css
+ */
 
 .menuItem {
   background-color: var(--color-card-background); /* Fundo branco/claro para o card */
@@ -19,7 +13,8 @@
   transition: transform var(--transition-speed-normal) ease, box-shadow var(--transition-speed-normal) ease;
   text-align: left;
   cursor: pointer;
-  width: 100%;
+  width: 100%; /* Ocupa a largura total do grid item */
+  
 }
 
 .menuItem:hover {
@@ -34,91 +29,84 @@
 
 .itemImageContainer {
   width: 100%;
-  height: 200px; /* Altura da imagem para dar mais espaço ao card */
-  overflow: hidden;
-  position: relative;
+  height: 200px; /* Altura fixa da imagem para consistência visual */
+  overflow: hidden; /* Garante que a imagem não transborde */
+  position: relative; /* Para possíveis sobreposições (não usadas atualmente) */
 }
 
 .itemImage {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Mantido 'cover' */
-  display: block;
+  object-fit: cover; /* Cobre o contêiner, cortando se necessário */
+  display: block; /* Remove espaços extras abaixo da imagem */
   transition: transform var(--transition-speed-normal) ease-in-out;
   background-color: #f8f9fa; /* Fundo claro para imagens com transparência */
 }
 
 .menuItem:hover .itemImage {
-  transform: scale(1.05); /* Zoom menor para ser mais sutil */
+  transform: scale(1.05); /* Zoom sutil na imagem ao passar o mouse */
 }
 
-.itemTags {
-  display: none; /* Esconde as tags */
-}
+/* .itemTags { display: none; } - Mantido como está, se você tem essa classe e quer escondê-la */
 
 .itemContent {
-  padding: var(--spacing-md); /* Mantém o padding interno */
+  padding: var(--spacing-md); /* Padding interno para o conteúdo textual */
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between; /* Espalha o conteúdo verticalmente */
-  /* Removido o padding-bottom daqui para controlar o espaço final com gap no itemPrices */
+  flex-grow: 1; /* Permite que o conteúdo ocupe o espaço disponível */
+  justify-content: space-between; /* Empurra os preços para baixo se a descrição for curta */
 }
 
 .itemHeader {
-  display: flex; /* Mantém flex para o nome */
-  flex-direction: column; /* Necessário para que o H3 se comporte como bloco */
-  align-items: flex-start; /* Alinha o nome à esquerda */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha o nome do item à esquerda */
   margin-bottom: var(--spacing-xs); /* Pequeno espaço entre o nome e a descrição */
   width: 100%;
 }
 
 .itemHeader .itemName {
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-heading); /* Fonte para títulos */
   font-size: 1.4rem;
   color: var(--color-text-dark);
-  margin: 0;
+  margin: 0; /* Remove margem padrão do h3 */
   line-height: 1.2;
   width: 100%;
 }
 
-/* Ajustes para a descrição */
 .itemDescription {
   font-size: 0.85rem;
   color: var(--color-text-dark);
   margin-bottom: var(--spacing-sm); /* Espaço entre a descrição e os preços */
   line-height: 1.4;
   flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limita a 3 linhas */
+  overflow: hidden; /* Esconde o texto que excede */
+  text-overflow: ellipsis; /* Adiciona reticências (...) ao final do texto cortado */
+  display: -webkit-box; /* Necessário para -webkit-line-clamp */
+  -webkit-line-clamp: 3; /* Limita a 3 linhas de texto para a descrição */
   -webkit-box-orient: vertical;
 }
 
-/* Container para os preços P e G */
 .itemPrices {
   display: flex;
-  flex-direction: row; /* Preços P e G lado a lado */
-  align-items: center; /* Alinha os preços no centro verticalmente */
+  flex-direction: row; /* Preços P e G ou único lado a lado */
+  align-items: flex-end; /* Alinha os preços na parte inferior do container de preços */
   justify-content: flex-start; /* Alinha os preços à esquerda */
-  gap: var(--spacing-sm); /* Espaço entre P e G */
-  margin-top: auto; /* EMPURRA OS PREÇOS PARA O FINAL do container itemContent */
-  /* Removido margin-top e margin-bottom específicos, a margem superior será auto
-     e a inferior será o padding do .itemContent ou do card inteiro. */
-  white-space: nowrap;
-  flex-shrink: 0;
+  gap: var(--spacing-sm); /* Espaço entre as opções de preço (P e G) */
+  margin-top: auto; /* Empurra o container de preços para o final do itemContent */
+  white-space: normal; /* **MUDANÇA CRÍTICA:** Permite que o texto quebre linhas */
+  flex-wrap: wrap; /* **MUDANÇA CRÍTICA:** Permite que os itens de preço quebrem para a próxima linha */
+  flex-shrink: 0; /* Impede que o container de preços encolha mais do que o necessário */
   width: 100%;
 }
 
-/* Estilo para cada opção de preço (P e G) */
 .priceOption {
-  font-family: var(--font-family-body); /* MUDADO: Usar a fonte do corpo para o preço */
+  font-family: var(--font-family-body);
   font-weight: bold;
-  margin: 0;
-  line-height: 1;
-  color: var(--color-primary); /* MESMA COR PARA AMBOS */
-  font-size: 1rem; /* DIMINUÍDO: Tamanho da fonte padrão para caber melhor */
+  margin: 0; /* Remove margem padrão dos parágrafos */
+  line-height: 1.2; /* Ajuste para melhor espaçamento em linhas quebradas */
+  color: var(--color-primary); /* Cor principal para o preço */
+  font-size: 1rem;
 }
 
 /* Media Queries para Responsividade do MenuItem */
@@ -134,7 +122,7 @@
     -webkit-line-clamp: 3;
   }
   .priceOption {
-    font-size: 0.95rem; /* Ajuste para telas menores */
+    font-size: 0.95rem;
   }
 }
 
@@ -153,7 +141,7 @@
     -webkit-line-clamp: 3;
   }
   .priceOption {
-    font-size: 0.9rem; /* Ajuste para telas menores */
+    font-size: 0.9rem;
   }
 }
 
@@ -172,7 +160,7 @@
     -webkit-line-clamp: 2;
   }
   .priceOption {
-    font-size: 0.85rem; /* Ajuste para telas menores */
+    font-size: 0.85rem;
   }
 }
 

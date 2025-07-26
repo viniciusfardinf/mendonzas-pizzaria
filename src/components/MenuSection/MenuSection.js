@@ -1,15 +1,12 @@
-// src/components/MenuSection/MenuSection.js
-
 import React, { useEffect, useState } from 'react';
 import MenuItem from '../MenuItem/MenuItem';
-import menuData from '../../data/menu.json'; // Importa seu arquivo JSON de dados do menu
-import styles from './MenuSection.module.css'; // Importa o CSS Module
+import styles from './MenuSection.module.css';
 
-// --- Mapeamento de Imagens (se estiver aqui ou em um arquivo auxiliar) ---
+// --- Mapeamento de Imagens (mantém como está) ---
 // Isso importa todas as imagens de src/assets/pizzas, pizzas_doces, etc.
 const imageContext = require.context('../../assets/', true, /\.(png|jpe?g|svg)$/);
 const imageMap = imageContext.keys().reduce((acc, item) => {
-  acc[item.replace('./', '/assets/')] = imageContext(item); // Converte para '/assets/pizzas/frango_cremoso.jpg'
+  acc[item.replace('./', '/assets/')] = imageContext(item); // Converte para '/assets/pizzas/presunto_queijo.jpg'
   return acc;
 }, {});
 // --- FIM DO Mapeamento de Imagens ---
@@ -21,22 +18,35 @@ function MenuSection() {
   const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
-    try {
-      setMenuCategories(menuData);
-      setLoading(false);
-      if (menuData.length > 0) {
-        setActiveCategory(menuData[0].category);
+    const fetchMenuData = async () => {
+      try {
+        // SUBSTITUA ESTA URL PELA URL DE "Web app" QUE VOCÊ COPIOU DO APPS SCRIPT
+        const appsScriptUrl = "https://script.google.com/macros/s/AKfycbz6gVwRAj391QEuUr19vUuD5zSpalwaxaD3pEq3X6dZSBHyAX-yIi3Qt0mqNsjK3sTO5A/exec";
+
+        const response = await fetch(appsScriptUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json(); // Já esperamos um JSON direto
+
+        setMenuCategories(data);
+        setLoading(false);
+        if (data.length > 0) {
+          setActiveCategory(data[0].category);
+        }
+      } catch (err) {
+        console.error("[MenuSection] Erro ao carregar ou processar o cardápio do Apps Script:", err);
+        setError("Erro ao carregar o cardápio. Por favor, verifique a URL do Apps Script ou a permissão da planilha.");
+        setLoading(false);
       }
-    } catch (err) {
-      console.error("[MenuSection] Erro fatal ao carregar ou processar o cardápio:", err);
-      setError("Erro ao carregar o cardápio. Por favor, verifique o arquivo menu.json.");
-      setLoading(false);
-    }
+    };
+
+    fetchMenuData();
   }, []);
 
   if (loading) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
+      <section id="menu" className={styles.menuSection}>
         <p>Carregando cardápio...</p>
       </section>
     );
@@ -44,7 +54,7 @@ function MenuSection() {
 
   if (error) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
+      <section id="menu" className={styles.menuSection}>
         <p className={styles.errorMessage}>Erro: {error}</p>
       </section>
     );
@@ -52,7 +62,7 @@ function MenuSection() {
 
   if (menuCategories.length === 0 || menuCategories.every(cat => !cat.items || cat.items.length === 0)) {
     return (
-      <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
+      <section id="menu" className={styles.menuSection}>
         <p className={styles.noItemsMessage}>Nenhum item de cardápio disponível no momento.</p>
       </section>
     );
@@ -65,7 +75,7 @@ function MenuSection() {
     : menuCategories;
 
   return (
-    <section id="menu" className={styles.menuSection}> {/* ID AQUI */}
+    <section id="menu" className={styles.menuSection}>
       <div className={styles.categoryButtons}>
         {allCategories.map(category => (
           <button
@@ -90,7 +100,7 @@ function MenuSection() {
               {categoryData.items.map(item => (
                 <MenuItem
                   key={item.id}
-                  item={{ ...item, imageUrl: imageMap[item.imageUrl] || item.imageUrl }} // Passa a URL resolvida
+                  item={{ ...item, imageUrl: imageMap[item.imageUrl] || item.imageUrl }}
                 />
               ))}
             </div>
