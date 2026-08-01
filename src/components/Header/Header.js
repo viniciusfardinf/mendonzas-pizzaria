@@ -9,7 +9,7 @@ function Header() {
       <div className={`${styles.container} ${styles.headerContainer}`}>
         {/* LOGO DA PIZZARIA - Clicável para voltar ao topo (Hero Section) */}
         {/* O título foi removido daqui. Se tiver uma imagem de logo, adicione-a aqui. */}
-        <a href="#hero" className={styles.logo}></a> 
+        <a href="#hero" className={styles.logo} aria-label="Mendonza's Pizzaria - Voltar ao topo"></a>
         
         <nav className={styles.mainNav}>
           <ul>        
