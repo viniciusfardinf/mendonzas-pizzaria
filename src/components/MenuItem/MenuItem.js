@@ -52,6 +52,12 @@ function MenuItem({ item }) {
               <p className={styles.priceOption}>P: {formatPrice(priceP)}</p>
               <p className={styles.priceOption}>G: {formatPrice(priceG)}</p>
             </>
+          ) : priceP ? (
+            // Se tiver apenas priceP, mostra ele
+            <p className={styles.priceOption}>P: {formatPrice(priceP)}</p>
+          ) : priceG ? (
+            // Se tiver apenas priceG, mostra ele
+            <p className={styles.priceOption}>G: {formatPrice(priceG)}</p>
           ) : price ? (
             // Se tiver apenas price, mostra ele
             <p className={styles.priceOption}>{formatPrice(price)}</p>
